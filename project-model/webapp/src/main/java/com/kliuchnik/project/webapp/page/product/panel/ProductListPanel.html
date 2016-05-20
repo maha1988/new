@@ -1,0 +1,31 @@
+<wicket:panel>
+	<table cellspacing="0" class="dataview">
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">Id</a></th>
+				<th><a wicket:id="sort-name">Name</a></th>
+				<th><a wicket:id="sort-price">Price</a></th>
+				<th><a wicket:id="sort-currentQuantity">Quantity</a></th>
+				<th><a wicket:id="sort-unit">Unit</a></th>
+				  <th><a wicket:id="sort-sklad">Sklad</a></th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="name"/></td>
+				<td><span wicket:id="price"/> </td>
+				<td><span wicket:id="currentQuantity"/></td>
+				<td><span wicket:id="unit"/> </td>
+			 <td><span wicket:id="sklad"/> </td>
+				
+				
+			
+				<td><a>delete</a>/<a>edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+
+</wicket:panel>

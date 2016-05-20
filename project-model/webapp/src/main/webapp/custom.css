@@ -1,0 +1,9 @@
+.red-link {
+	font-weight: bold;
+	color: red;
+}
+table tr td,
+table tr th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
