@@ -40,9 +40,12 @@ public class Sklad extends AbstractModel implements Serializable {
 	public void setProducts(Product products) {
 		this.products.add(products);
 	}
+
+
 	@Override
 	public String toString() {
 		return "Sklad [name=" + name + ", products=" + products + "]";
 	}
+	
 
 }

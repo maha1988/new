@@ -2,18 +2,19 @@ package com.kliuchnik.project.webapp.page;
 
 import java.util.Calendar;
 
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+import com.kliuchnik.project.webapp.app.AuthorizedSession;
+import com.kliuchnik.project.webapp.component.menu.MenuCustomer;
 import com.kliuchnik.project.webapp.component.menu.MenuPanel;
-import com.kliuchnik.project.webapp.component.menu.MenuPanelLoggedUser;
-import com.kliuchnik.project.webapp.page.product.ProductsPage;
 
 public abstract class AbstractPage extends WebPage {
+	boolean admin = AuthorizedSession.get().getRoles().contains("ADMIN");
+	boolean customer = AuthorizedSession.get().getRoles().contains("CUSTOMER");
 
 	 public AbstractPage() {
 	        super();
@@ -27,11 +28,18 @@ public abstract class AbstractPage extends WebPage {
 	    protected void onInitialize() {
 	        super.onInitialize();
 
-	        if (getPage().getClass().equals(ProductsPage.class)) {
-	            add(new MenuPanelLoggedUser("menu-panel"));
-	        } else {
-	            add(new MenuPanel("menu-panel"));
-	        }
+	        if (admin  ) {
+				add(new MenuPanel("menu-panel"));
+			} else  {
+				
+				add(new MenuCustomer("menu-panel"));
+			}
+	        
+	        
+	        
+	        
+	   
+	                
 	        AbstractReadOnlyModel<Integer> yearModel = new AbstractReadOnlyModel<Integer>() {
 	            @Override
 	            public Integer getObject() {
@@ -39,11 +47,11 @@ public abstract class AbstractPage extends WebPage {
 	            }
 	        };
 
-//	        WebMarkupContainer footer = new WebMarkupContainer("footer");
-//	        add(footer);
-//	        footer.add(new Label("current-year", yearModel));
-//	        footer.add(AttributeModifier.append("onclick", "alert('Im clicked')"));
+	        WebMarkupContainer footer = new WebMarkupContainer("footer");
+	        add(footer);
+	        footer.add(new Label("current-year", yearModel));
+	       // footer.add(AttributeModifier.append("onclick", "alert('Im clicked')"));
 	    }
-	    
+	      
 
 	}

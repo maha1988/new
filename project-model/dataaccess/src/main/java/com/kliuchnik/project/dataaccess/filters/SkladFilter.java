@@ -1,25 +1,23 @@
 package com.kliuchnik.project.dataaccess.filters;
 
-import javax.persistence.metamodel.SingularAttribute;
-
 import com.kliuchnik.project.datamodel.Product;
 
 public class SkladFilter extends AbstractFilter {
 	
 	        private String name;
-	        private Product products;
+	        private Product product;
 	       		    
 		    
 		   
 
 		    private boolean isFetchProduct;
 
-		    public Product getProducts() {
-				return products;
+		    public Product getProduct() {
+				return product;
 			}
 
-			public void setProducts(Product products) {
-				this.products = products;
+			public void setProduct(Product product) {
+				this.product = product;
 			}
 
 					public String getName() {

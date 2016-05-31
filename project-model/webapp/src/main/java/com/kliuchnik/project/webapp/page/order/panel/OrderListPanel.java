@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.apache.wicket.datetime.markup.html.basic.DateLabel;
@@ -11,7 +12,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
-
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
@@ -20,11 +21,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import com.kliuchnik.project.dataaccess.filters.OrderFilter;
-
 import com.kliuchnik.project.datamodel.Order;
 import com.kliuchnik.project.datamodel.Order_;
-
 import com.kliuchnik.project.service.OrderService;
+import com.kliuchnik.project.webapp.page.order.OrdersPage;
 
 
 
@@ -37,7 +37,7 @@ public class OrderListPanel extends Panel {
         super(id);
 
         OrderDataProvider orderDataProvider = new OrderDataProvider();
-        DataView<Order> dataView = new DataView<Order>("orderlist", orderDataProvider, 5) {
+        DataView<Order> dataView = new DataView<Order>("orderlist", orderDataProvider, 10) {
             @Override
             protected void populateItem(Item<Order> item) {
                 Order order = item.getModelObject();
@@ -45,13 +45,36 @@ public class OrderListPanel extends Panel {
                 item.add(new Label("id", order.getId()));
                 item.add(DateLabel.forDatePattern("date", Model.of(order.getDate()), "dd-MM-yyyy"));
                 item.add(new Label("sum", order.getSum()));
-                item.add(new Label("customer", order.getCustomer().getId()));
                
-              //  item.add(DateLabel.forDatePattern("created", Model.of(product.getCreated()), "dd-MM-yyyy"));
+               
+                if(order.getCustomer() == null){
+               	 item.add(new Label("customer", "  "));
+               }
+               else {
+            	   item.add(new Label("customer", order.getCustomer().getId()));
+               	
+               }
+                  
+   
+                item.add(new Link<Void>("edit-link") {
+                    @Override
+                    public void onClick() {
+                  //      setResponsePage(new OrderEditPanel(order));
+                    }
+                });
 
-   //             CheckBox checkbox = new CheckBox("active", Model.of(product.getActive()));
-     //           checkbox.setEnabled(false);
-         //       item.add(checkbox);
+                item.add(new Link<Void>("delete-link") {
+                    @Override
+                    public void onClick() {
+                        try {
+                           orderService.delete( order);
+                        } catch (PersistenceException e) {
+                            System.out.println("caughth persistance exception");
+                        }
+
+                        setResponsePage(new OrdersPage());
+                    }
+                });  
             }
         };
         add(dataView);
@@ -59,7 +82,6 @@ public class OrderListPanel extends Panel {
 
         add(new OrderByBorder("sort-id", Order_.id, orderDataProvider));
         add(new OrderByBorder("sort-customer", Order_.customer, orderDataProvider));
-    	add(new OrderByBorder("sort-date", Order_.date, orderDataProvider));
     	add(new OrderByBorder("sort-sum", Order_.sum, orderDataProvider));
         
        
@@ -73,6 +95,8 @@ public class OrderListPanel extends Panel {
         public OrderDataProvider() {
             super();
             orderFilter = new OrderFilter();
+            orderFilter.setFetchCustomer(true);
+            orderFilter.setFetchProduct(true);  
             setSort((Serializable) Order_.date, SortOrder.ASCENDING);
         }
 

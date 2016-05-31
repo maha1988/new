@@ -1,30 +1,28 @@
 <wicket:panel>
-	<table cellspacing="0" class="dataview">
+<meta charset="utf-8" />
+	<table cellspacing="0" class="list-table" align="center">
 		<thead>
 			<tr>
-				<th><a wicket:id="sort-id">Id</a></th>
-				<th><a wicket:id="sort-date">Date</a></th>
-				<th><a wicket:id="sort-sum">Sum</a></th>
-				<th><a wicket:id="sort-customer">Customer</a></th>
+				<th><a wicket:id="sort-id">№</a></th>
+				<th>Дата</th>
+				<th><a wicket:id="sort-sum">Сумма</a></th>
+				<th><a wicket:id="sort-customer">Покупатель</a></th>
 				
+				<th> <a> Действие</a></th>
 			</tr>
 		
 		</thead>
-		
+			<tbody>
 			<tr wicket:id="orderlist">
 				<td><span wicket:id="id"/></td>
 				<td><span wicket:id="date"/></td>
 				<td><span wicket:id="sum"/> </td>
 				<td><span wicket:id="customer"/></td>
-				
-				
-				
-			<!--  	<td><span wicket:id="created"/></td>
-				<td><input wicket:id="active" type="checkbox" /></td>-->
-				<td><a>delete</a>/<a>edit</a></td>
+							
+			<td><a wicket:id="delete-link">Удалить</a>/<a wicket:id="edit-link">Изменить</a></td>
 			</tr>
-		
+			</tbody>
 	</table>
-	<div wicket:id="paging"></div>
+	<div wicket:id="paging" align="center"></div>
 
 </wicket:panel>

@@ -2,8 +2,38 @@
 	font-weight: bold;
 	color: red;
 }
-table tr td,
-table tr th {
-	border: 1px solid black;
-	border-collapse: collapse;
+
+table.list-table {
+border-spacing: 0 10px;
+font-family: 'Open Sans', sans-serif;
+font-weight: bold;
+}
+ table.list-table  th {
+padding: 10px 20px;
+background: #333;
+color: #F9C941;
+border-right: 2px solid; 
+font-size: 0.9em;
+}
+ table.list-table  th:first-child {
+text-align: left;
+}
+ table.list-table th:last-child {
+border-right: none;
+}
+ table.list-table td {
+vertical-align: middle;
+padding: 10px;
+font-size: 14px;
+text-align: center;
+border-top: 2px solid #56433D;
+border-bottom: 2px solid #56433D;
+border-right: 2px solid #56433D;
+}
+ table.list-table td:first-child {
+border-left: 2px solid #56433D;
+border-right: none;
+}
+table.list-table  td:nth-child(2){
+text-align: left;
 }

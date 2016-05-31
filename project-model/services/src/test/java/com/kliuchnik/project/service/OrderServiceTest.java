@@ -89,13 +89,13 @@ public class OrderServiceTest {
 		product1.setCurrentQuantity(4L);
 		product1.setPrice(new BigDecimal("2500.00"));
 		product1.setProductName("Pants");
-		product1.setUnit(Unit.PIECE);
+		product1.setUnit(Unit.ШT);
 		product1.setSklad(null);
 
 		product2.setCurrentQuantity(3L);
 		product2.setPrice(new BigDecimal("1000.00"));
 		product2.setProductName("Dress");
-		product2.setUnit(Unit.PACKAGE);
+		product2.setUnit(Unit.УПАКОВКА);
 
 		product2.setSklad(null);
 
@@ -168,13 +168,13 @@ public class OrderServiceTest {
 			product1.setCurrentQuantity(4L);
 			product1.setPrice(new BigDecimal("2500.00"));
 			product1.setProductName("Pants");
-			product1.setUnit(Unit.PIECE);
+			product1.setUnit(Unit.ШT);
 			product1.setSklad(null);
 
 			product2.setCurrentQuantity(3L);
 			product2.setPrice(new BigDecimal("1000.00"));
 			product2.setProductName("Dress");
-			product2.setUnit(Unit.PACKAGE);
+			product2.setUnit(Unit.УПАКОВКА);
 
 			product2.setSklad(null);
 
@@ -187,7 +187,7 @@ public class OrderServiceTest {
 			
 			orderService.update(order);
 		
-	   	orderService.delete(order.getId());
+	   	orderService.delete(order);
 		}
 
 		OrderFilter orderFilter = new OrderFilter();

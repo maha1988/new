@@ -27,7 +27,7 @@ public class Product extends AbstractModel  implements Serializable{
 	@Column
 	private BigDecimal price;
 	
-	@ManyToOne(targetEntity = Sklad.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = Sklad.class, fetch = FetchType.LAZY)
 	private Sklad sklad;	
 
 	public Sklad getSklad() {

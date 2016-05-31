@@ -65,7 +65,7 @@ public class SkladServiceTest {
 		Assert.assertEquals(updatedFName,
 		skladService.getSklad(sklad.getId()).getName());
 
-		skladService.delete(sklad.getId());
+		skladService.delete(sklad);
 
 	 Assert.assertNull(skladService.getSklad(sklad.getId()));
 	}
@@ -75,7 +75,7 @@ public class SkladServiceTest {
 		// clean all data from sklad
 		List<Sklad> all = skladService.getAll();
 		for (Sklad sklad : all) {
-			skladService.delete(sklad.getId());
+			skladService.delete(sklad);
 		}
 
 		// start create new data

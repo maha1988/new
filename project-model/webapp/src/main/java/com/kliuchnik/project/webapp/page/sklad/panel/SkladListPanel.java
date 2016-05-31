@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.apache.wicket.datetime.markup.html.basic.DateLabel;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
@@ -19,14 +23,13 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import com.kliuchnik.project.dataaccess.filters.ProductFilter;
 import com.kliuchnik.project.dataaccess.filters.SkladFilter;
-import com.kliuchnik.project.datamodel.Product;
-import com.kliuchnik.project.datamodel.Product_;
 import com.kliuchnik.project.datamodel.Sklad;
 import com.kliuchnik.project.datamodel.Sklad_;
-import com.kliuchnik.project.service.ProductService;
 import com.kliuchnik.project.service.SkladService;
+import com.kliuchnik.project.webapp.page.customer.CustomerEditPanel;
+import com.kliuchnik.project.webapp.page.sklad.SkladEditPanel;
+import com.kliuchnik.project.webapp.page.sklad.SkladPage;
 
 
 public class SkladListPanel extends Panel {
@@ -38,21 +41,38 @@ public class SkladListPanel extends Panel {
         super(id);
 
         SkladDataProvider skladDataProvider = new SkladDataProvider();
-        DataView<Sklad> dataView = new DataView<Sklad>("skladlist", skladDataProvider, 5) {
+        DataView<Sklad> dataView = new DataView<Sklad>("skladlist", skladDataProvider, 10) {
             @Override
             protected void populateItem(Item<Sklad> item) {
                 Sklad sklad = item.getModelObject();
 
                 item.add(new Label("id", sklad.getId()));
                 item.add(new Label("name", sklad.getName()));
-            //    item.add(new Label("products", sklad.getProducts()));
-                                      
-                               
-              //  item.add(DateLabel.forDatePattern("created", Model.of(product.getCreated()), "dd-MM-yyyy"));
+              //  item.add(new Label("products", new Model(sklad.getProducts());
+            
+                
+                
+                
+                item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+					//	setResponsePage(new SkladEditPanel( sklad));
+					}
+                }); 
 
-   //             CheckBox checkbox = new CheckBox("active", Model.of(product.getActive()));
-     //           checkbox.setEnabled(false);
-         //       item.add(checkbox);
+                item.add(new Link<Void>("delete-link") {
+                    @Override
+                    public void onClick() {
+                        try {
+                           skladService.delete(sklad);
+                        } catch (PersistenceException e) {
+                            System.out.println("caughth persistance exception");
+                        }
+
+                        setResponsePage(new SkladPage());
+                    }
+                });  
+            
             }
         };
         add(dataView);
@@ -60,7 +80,7 @@ public class SkladListPanel extends Panel {
 
         add(new OrderByBorder("sort-id", Sklad_.id, skladDataProvider));
         add(new OrderByBorder("sort-name", Sklad_.name, skladDataProvider));
-       // add(new OrderByBorder("sort-products", Sklad_.products, skladDataProvider));
+    //   add(new OrderByBorder("sort-products", Sklad_.products, skladDataProvider));
        
        
     }

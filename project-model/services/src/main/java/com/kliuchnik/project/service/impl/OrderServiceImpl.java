@@ -77,9 +77,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void delete(Long id) {
-		LOGGER.info("Order delete: {}", orderDao.get(id));
-		orderDao.delete(id);
+	public void delete(Order order) {
+		LOGGER.info("Order delete: {}", orderDao.get(order.getId()));
+		orderDao.delete(order.getId());
 
 	}
 	@Override
@@ -91,7 +91,14 @@ public class OrderServiceImpl implements OrderService {
 		LOGGER.info("Order find by filter: {}", orderFilter);
 		return orderDao.find(orderFilter);
 	}
-
+	@Override
+	public void saveOrUpdate(Order order) {
+		if (order.getId() == null) {
+			orderDao.insert(order);
+		} else {
+			orderDao.update(order);
+		}
+	}
 	@Override
 	public List<Order> getAll() {
 		LOGGER.info("Order getAll: {}", "All orders");

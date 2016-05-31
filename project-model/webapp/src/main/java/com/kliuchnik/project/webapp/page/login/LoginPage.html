@@ -1,0 +1,50 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="stylelogin.css" type="text/css"
+	media="screen" title="Stylesheet" />
+
+
+
+</head>
+<body>
+
+	<div class="login">
+
+		<h1 align="center">Вход на сайт</h1>
+
+		<form wicket:id="form">
+			<p class="input">
+				<input type="text" wicket:id="username" value=""
+					placeholder="Username " autocomplete="off" />
+			</p>
+			<p class="input">
+				<input type="password" wicket:id="password" value=""
+					placeholder="Password" />
+			</p>
+
+			<p class="submit">
+
+				<input type="submit" class="btn waves-effect" wicket:id="submit-btn" name="commit"
+					value="Login">
+			</p>
+			<!-- <p class="btn waves-effect"><input type="submit" wicket:id="submit-btn"  value="Login"></p>
+			  <button type="submit" class="btn waves-effect" wicket:id="submit-btn">
+				<b>login</b>
+			</button>-->
+
+		</form>
+
+		<div wicket:id="feedbackpanel"></div>
+	</div>
+
+</body>
+
+
+
+
+</html>

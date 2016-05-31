@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
@@ -20,92 +20,107 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import com.kliuchnik.project.dataaccess.filters.CustomerFilter;
-import com.kliuchnik.project.dataaccess.filters.ProductFilter;
-import com.kliuchnik.project.dataaccess.filters.SkladFilter;
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.Customer_;
-import com.kliuchnik.project.datamodel.Product;
-import com.kliuchnik.project.datamodel.Product_;
-import com.kliuchnik.project.datamodel.Sklad;
-import com.kliuchnik.project.datamodel.Sklad_;
-import com.kliuchnik.project.service.ProductService;
-import com.kliuchnik.project.service.SkladService;
+import com.kliuchnik.project.datamodel.User;
+import com.kliuchnik.project.datamodel.User_;
 import com.kliuchnik.project.service.UserService;
-
+import com.kliuchnik.project.webapp.page.customer.CustomerEditPanel;
+import com.kliuchnik.project.webapp.page.customer.CustomersPage;
+import com.kliuchnik.project.webapp.page.product.ProductsPage;
 
 public class CustomerListPanel extends Panel {
 
-    @Inject
-    private UserService userService;
+	@Inject
+	private UserService userService;
 
-    public CustomerListPanel(String id) {
-        super(id);
+	public CustomerListPanel(String id) {
+		super(id);
 
-      CustomerDataProvider customerDataProvider = new CustomerDataProvider();
-        DataView<Customer> dataView = new DataView<Customer>("customerlist", customerDataProvider, 5) {
-            @Override
-            protected void populateItem(Item<Customer> item) {
-                Customer customer = item.getModelObject();
+		CustomerDataProvider customerDataProvider = new CustomerDataProvider();
+		DataView<Customer> dataView = new DataView<Customer>("customerlist", customerDataProvider, 10) {
+			@Override
+			protected void populateItem(Item<Customer> item) {
+				Customer customer = item.getModelObject();
 
-                item.add(new Label("id", customer.getId()));
-                item.add(new Label("address", customer.getAddress()));
-                item.add(new Label("bank",customer.getBankR() ));
-               
-                                      
-                               
-              //  item.add(DateLabel.forDatePattern("created", Model.of(product.getCreated()), "dd-MM-yyyy"));
+				item.add(new Label("id", customer.getId()));
+				item.add(new Label("address", customer.getAddress()));
+				item.add(new Label("bank", customer.getBankR()));
+				item.add(new Label("name", customer.getUser().getName()));
+				item.add(new Label("password", customer.getUser().getPassword()));
+            
+				item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+					//	setResponsePage(new CustomerEditPanel(customer));
+					}
+				});
 
-   //             CheckBox checkbox = new CheckBox("active", Model.of(product.getActive()));
-     //           checkbox.setEnabled(false);
-         //       item.add(checkbox);
-            }
-        };
-        add(dataView);
-        add(new PagingNavigator("paging", dataView));
+				item.add(new Link<Void>("delete-link") {
+					@Override
+					public void onClick() {
+												
+						
+						try { User user = customer.getUser();
+							
+							userService.delete(customer,user);
+							;
+						} catch (PersistenceException e) {
+							System.out.println("caughth persistance exception");
+						}
 
-        add(new OrderByBorder("sort-id", Customer_.id, customerDataProvider));
-        add(new OrderByBorder("sort-address", Customer_.address, customerDataProvider));
-        add(new OrderByBorder("sort-bank", Customer_.bankR, customerDataProvider));
-       
-        
-       // add(new OrderByBorder("sort-products", Sklad_.products, skladDataProvider));
-       
-       
-    }
+						setResponsePage(new CustomersPage());
+					}
+				});
 
-    private class CustomerDataProvider extends SortableDataProvider<Customer, Serializable> {
+			}
+		};
+		add(dataView);
+		add(new PagingNavigator("paging", dataView));
 
-        private CustomerFilter customerFilter;
+		add(new OrderByBorder("sort-id", Customer_.id, customerDataProvider));
+		add(new OrderByBorder("sort-address", Customer_.address, customerDataProvider));
+		add(new OrderByBorder("sort-bank", Customer_.bankR, customerDataProvider));
+		add(new OrderByBorder("sort-name", User_.name, customerDataProvider));
+		add(new OrderByBorder("sort-password", User_.password, customerDataProvider));
+		
+		
+	}
 
-        public CustomerDataProvider() {
-            super();
-            customerFilter = new CustomerFilter();
-            setSort((Serializable) Customer_.address, SortOrder.ASCENDING);
-        }
+	private class CustomerDataProvider extends SortableDataProvider<Customer, Serializable> {
 
-        @Override
-        public Iterator<Customer> iterator(long first, long count) {
-            Serializable property = getSort().getProperty();
-            SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
+		private CustomerFilter customerFilter;
 
-            customerFilter.setSortProperty((SingularAttribute) property);
-            customerFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
+		public CustomerDataProvider() {
+			super();
+			customerFilter = new CustomerFilter();
+			customerFilter.setFetchOrder(true);
+			customerFilter.setFetchUser(true);
+			setSort((Serializable) Customer_.user, SortOrder.ASCENDING);
+		}
 
-            customerFilter.setLimit((int) count);
-            customerFilter.setOffset((int) first);
-            return userService.find(customerFilter).iterator();
-        }
+		@Override
+		public Iterator<Customer> iterator(long first, long count) {
+			Serializable property = getSort().getProperty();
+			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
 
-        @Override
-        public long size() {
-            return userService.count(customerFilter);
-        }
+			customerFilter.setSortProperty((SingularAttribute) property);
+			customerFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
 
-        @Override
-        public IModel<Customer> model(Customer object) {
-            return new Model( object);
-        }
+			customerFilter.setLimit((int) count);
+			customerFilter.setOffset((int) first);
+			return userService.find(customerFilter).iterator();
+		}
 
-    }
-    }
-    
+		@Override
+		public long size() {
+			return userService.count(customerFilter);
+		}
+
+		@Override
+		public IModel<Customer> model(Customer object) {
+			return new Model(object);
+		}
+
+	}
+}

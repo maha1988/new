@@ -59,7 +59,7 @@ public class ProductServiceTest {
         Sklad sklad = new Sklad();
         
     	product.setProductName("Dress");
-        product.setUnit(Unit.PIECE);
+        product.setUnit(Unit.ШT);
         product.setCurrentQuantity(4L);
         product.setPrice(new BigDecimal("2000.00"));
         
@@ -81,7 +81,7 @@ public class ProductServiceTest {
 
        Assert.assertEquals(updatedPName, productService.getProduct(product.getId()).getProductName());
 
-         productService.delete(product.getId());
+         productService.delete(product);
          
       // Assert.assertNull(productService.getSklad(sklad.getId()));
       // Assert.assertNull(productService.getProduct(product.getId()));
@@ -91,7 +91,7 @@ public class ProductServiceTest {
 		// clean all data from product
 		List<Product> all = productService.getAll();
 		for (Product product : all) {
-			productService.delete(product.getId());
+			productService.delete(product);
 		}
 
 		// start create new data
@@ -101,7 +101,7 @@ public class ProductServiceTest {
 			 Sklad sklad = new Sklad();	
 			 			 
 			product.setProductName("Dress"+i);
-			product.setUnit(Unit.PIECE);
+			product.setUnit(Unit.ШT);
 	        product.setCurrentQuantity(4L);
 	        product.setPrice(new BigDecimal("6000.00"));
 	        sklad.setName("clothes");

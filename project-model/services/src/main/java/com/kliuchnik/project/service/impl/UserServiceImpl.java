@@ -1,5 +1,7 @@
 package com.kliuchnik.project.service.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.kliuchnik.project.dataaccess.CustomerDao;
 import com.kliuchnik.project.dataaccess.UserDao;
 import com.kliuchnik.project.dataaccess.filters.CustomerFilter;
-import com.kliuchnik.project.dataaccess.filters.SkladFilter;
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.service.UserService;
@@ -29,9 +30,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void register(User user, Customer customer) {
 		customer.setUser(user);
-		userDao.insert(user);
+		
+		
 		customerDao.insert(customer);
-
+		userDao.insert(user);
+		
 		LOGGER.info("User regirstred: {}",user, customer);
 	}
 
@@ -62,18 +65,24 @@ public class UserServiceImpl implements UserService {
 		customerDao.update(customer);
 
 	}
+	
 	@Override
-	public void delete(Long id) {
-		LOGGER.info("User delete: {}", userDao.get(id), customerDao.get(id));
-		
-		customerDao.delete(id);
-		userDao.delete(id);
-
+	public void saveOrUpdate(User user) {
+		if (user.getId() == null) {
+			userDao.insert(user);
+		} else {
+			userDao.update(user);
+		}
 	}
+	
 	@Override
-    public Long count(CustomerFilter customerFilter) {
-        return customerDao.count(customerFilter);
-    }
+	public void saveOrUpdate(Customer customer) {
+		if (customer.getId() == null) {
+			customerDao.insert(customer);
+		} else {
+			customerDao.update(customer);
+		}
+	}
 	@Override
 	public List<Customer> find(CustomerFilter userFilter) {
 		
@@ -89,4 +98,31 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.getAll();
 	}
+	@Override
+    public long count(CustomerFilter customerFilter) {
+        return customerDao.count(customerFilter);
+    }
+	@Override
+    public User getByNameAndPassword(String userName, String password) {
+        return userDao.find(userName, password);
+    }
+
+    @Override
+    public Collection<? extends String> resolveRoles(Long id) {
+        User user = userDao.get(id);
+        return Collections.singletonList(user.getRole().name());
+    }
+
+	
+
+	
+	@Override
+	public void delete(Customer customer, User user ) {
+		LOGGER.info("Customer delete: {}", customerDao.get(customer.getId()));
+		customerDao.delete(customer.getId());
+		userDao.delete(user.getId());	
+	
+	}
+
+	
 }

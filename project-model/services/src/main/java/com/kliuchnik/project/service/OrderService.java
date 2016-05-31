@@ -8,24 +8,29 @@ import com.kliuchnik.project.dataaccess.filters.OrderFilter;
 import com.kliuchnik.project.dataaccess.filters.ProductFilter;
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.Order;
+import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Sklad;
 
 public interface OrderService {
-	 Long count(OrderFilter filter);
-	 @Transactional
-	    void register(Order order );
-	 
-	    Order getOrder(Long id);
-	    Customer getCustomer(Long id);
+	Long count(OrderFilter filter);
 
-	    @Transactional
-	    void update(Order order );
+	@Transactional
+	void register(Order order);
 
-	   @Transactional
-	    void delete(Long id);
+	Order getOrder(Long id);
 
-	   List<Order> find(OrderFilter orderFilter);
+	Customer getCustomer(Long id);
 
-	    List<Order> getAll();
+	@Transactional
+	void update(Order order);
+
+	@Transactional
+	void saveOrUpdate(Order order);
+
+	@Transactional
+	void delete(Order order);
+
+	List<Order> find(OrderFilter orderFilter);
+
+	List<Order> getAll();
 }
-

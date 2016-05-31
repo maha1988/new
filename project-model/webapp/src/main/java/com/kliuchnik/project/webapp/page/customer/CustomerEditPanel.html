@@ -1,0 +1,40 @@
+<wicket:panel>
+<meta charset="utf-8" />
+	<h2>Customer edit</h2>
+	<form wicket:id="form">
+
+		<table>
+			 <tr>
+				<td><b>Имя:</b></td>
+				<td><input type="text" wicket:id="name" /></td>
+			</tr>
+									
+			<tr>
+				<td><b>Роль:</b></td>
+				<td><select wicket:id="role"></select></td>
+			</tr>
+		
+			<tr>
+				<td><b>Пароль:</b></td>
+				<td><input type="text" wicket:id="password" /></td>
+			</tr>
+			<tr>
+				<td><b>Адрес:</b></td>
+				<td><input type="text" wicket:id="address" /></td>
+			</tr>
+			<tr>
+				<td><b>Банковские реквизиты</b></td>
+				<td><input type="text" wicket:id="bankR" /></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<button wicket:id="save">Сохранить</button>
+					<button wicket:id="cancel">Отменить</button>
+				</td>
+			</tr>
+			
+		</table>
+	</form>
+ 
+</wicket:panel>

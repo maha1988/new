@@ -7,7 +7,7 @@ import com.kliuchnik.project.datamodel.Product;
 
 public interface ProductDao extends AbstractDao<Product, Long> {
 	
-	Long count(ProductFilter productFilter);
+	Long count(ProductFilter filter);
 	
-	 List<Product> find(ProductFilter productFilter);
+	 List<Product> find(ProductFilter filter);
 }

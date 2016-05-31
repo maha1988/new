@@ -9,20 +9,25 @@ import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Sklad;
 
 public interface ProductService {
-	 Long count(ProductFilter productFilter);
-	
-	 @Transactional
-	    void register(Product product, Sklad sklad );
+	Long count(ProductFilter filter);
 
-	    Product getProduct(Long id);
-	    Sklad getSklad(Long id);
+	@Transactional
+	void register(Product product, Sklad sklad);
 
-	    @Transactional
-	   void update(Product product );
+	Product getProduct(Long id);
 
-	    @Transactional
-	    void delete(Long id);
-	    List<Product> find(ProductFilter productFilter);
+	Sklad getSklad(Long id);
 
-	    List<Product> getAll();
+	@Transactional
+	void update(Product product);
+
+	@Transactional
+	void saveOrUpdate(Product product);
+
+	@Transactional
+	void delete(Product product );
+
+	List<Product> find(ProductFilter productFilter);
+
+	List<Product> getAll();
 }

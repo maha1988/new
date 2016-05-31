@@ -1,6 +1,4 @@
 package com.kliuchnik.project.dataaccess.filters;
-import javax.persistence.metamodel.SingularAttribute;
-
 import com.kliuchnik.project.datamodel.Role;
 
 

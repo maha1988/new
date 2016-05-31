@@ -1,4 +1,5 @@
 package com.kliuchnik.project.service.impl;
+
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import com.kliuchnik.project.dataaccess.filters.ProductFilter;
 import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Sklad;
 import com.kliuchnik.project.service.ProductService;
+import com.kliuchnik.project.service.UserService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -19,15 +21,16 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao productDao;
 	@Inject
 	private SkladDao skladDao;
+	@Inject
+	private UserService userService;
 
-	
 	@Override
 	public void register(Product product, Sklad sklad) {
 		productDao.insert(product);
 		sklad.setProducts(product);
 
 		skladDao.insert(sklad);
-		 LOGGER.info("Product regirstred: {}", product);
+		LOGGER.info("Product regirstred: {}", product);
 
 	}
 
@@ -42,25 +45,19 @@ public class ProductServiceImpl implements ProductService {
 		LOGGER.info("Sklad select: {}", skladDao.get(id));
 		return skladDao.get(id);
 	}
+
 	@Override
 	public void update(Product product) {
 		LOGGER.info("Product update, new and old: {}", product, productDao.get(product.getId()));
-	productDao.update(product);
+		productDao.update(product);
 
 	}
 
 	@Override
-	public void delete(Long id) {
-		LOGGER.info("Product delete: {}", productDao.get(id));
-		productDao.delete(id);
-
+	public Long count(ProductFilter productFilter) {
+		return productDao.count(productFilter);
 	}
-	
-	
-	@Override
-    public Long count(ProductFilter productFilter) {
-        return productDao.count(productFilter);
-    }
+
 	@Override
 	public List<Product> find(ProductFilter productFilter) {
 		LOGGER.info("Product find by filter: {}", productFilter);
@@ -68,8 +65,25 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public void saveOrUpdate(Product product) {
+		if (product.getId() == null) {
+			productDao.insert(product);
+		} else {
+			productDao.update(product);
+		}
+	}
+
+	@Override
 	public List<Product> getAll() {
 		LOGGER.info("Product getAll: {}", "All products");
 		return productDao.getAll();
+	}
+
+	@Override
+	public void delete(Product product) {
+		LOGGER.info("Product delete: {}", productDao.get(product.getId()));
+		productDao.delete(product.getId());
+		
+
 	}
 }

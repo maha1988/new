@@ -77,7 +77,7 @@ public class UserServiceTest {
 
 		//Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getName());
 
-		userService.delete(user.getId());
+		//userService.delete(user.getId());
 
 		// Assert.assertNull(userService.getCustomer(customer.getId()));
 		 //Assert.assertNull(userService.getUser(user.getId()));
@@ -88,7 +88,7 @@ public class UserServiceTest {
 		// clean all data from users
 		  List<User> all =userService.getAll();
 	        for (User user : all) {
-	            userService.delete(user.getId());
+	      //      userService.delete(user.getId());
 		}
 
 		// start create new data

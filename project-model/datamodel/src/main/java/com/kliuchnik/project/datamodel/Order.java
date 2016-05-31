@@ -35,6 +35,7 @@ public class Order extends AbstractModel implements Serializable {
 
 	@ManyToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
 	private Customer customer;
+	
 
 	public Customer getCustomer() {
 		return customer;

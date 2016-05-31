@@ -1,0 +1,27 @@
+<wicket:panel>
+	<table class="list-table">
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th><a wicket:id="sort-name">name</a></th>
+				<th><a wicket:id="sort-password">password</a></th>
+				<th><a wicket:id="sort-role">role</a></th>
+				
+				<th>actions</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="userlist">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="name"/></td>
+				<td><span wicket:id="password"/></td>
+				<td><span wicket:id="role"/></td>
+				
+				<td><a>delete</a>/<a wicket:id="edit-link">edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+
+</wicket:panel>
