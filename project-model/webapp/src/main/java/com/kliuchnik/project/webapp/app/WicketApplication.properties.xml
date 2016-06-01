@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="btn.create.product">Create product</entry>
+	<entry key="btn.create.product">Create product </entry>
+	<entry key="btn.create.order">Create order </entry>
+	<entry key="btn.create.sklad">Create stock </entry>
+	<entry key="btn.create.customer">Create customer </entry>
+	<entry key="btn.create.delete">Delete </entry>
+	<entry key="btn.create.edit">Edit </entry>
+	<entry key="logo">Keeping products in stock </entry>
 
 	<entry key="menu.home">Home</entry>
 	<entry key="menu.products">Products</entry>
 	<entry key="menu.sklad">Stocks</entry>
 	<entry key="menu.customers">Customers</entry>
-	<entry key="menu.orders">Customers</entry>
+	<entry key="menu.orders">Orders</entry>
 	<entry key="menu.logout">Logout</entry>
 
 	<entry key="loging.err.auth">authorization error</entry>
 
 	<entry key="product.saved">Product saved</entry>
 
+	<entry key="name.sklad">Name stock </entry>
+	<entry key="name.product">Product name </entry>
+	<entry key="price.product">Price </entry>
+	<entry key="quantity.product">Quantity </entry>
+	<entry key="unit.product">Unit </entry>
+	<entry key="sklad.product">Stock </entry>
+	<entry key="action">Action </entry>
 
-	<entry key="products.price">Base price</entry>
-	
+   <entry key="date">Date </entry>
+   <entry key="sum">Sum</entry>
+    <entry key="customer">Customer</entry>
+   
+<entry key="customer.name">Name</entry>
+<entry key="customer.password">Password</entry>
+<entry key="customer.address">Address</entry>
+<entry key="customer.bankr">Bank</entry>
+
+
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>
-	
+
 	<entry key="products.price.title">enter price</entry>
 </properties>

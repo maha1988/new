@@ -1,15 +1,17 @@
 <wicket:panel>
-<meta charset="utf-8" />
+<head>
+  <meta charset="utf-8" />
+</head> 
 	<table cellspacing="0" class="list-table" align="center">
 		<thead>
 			<tr>
 				<th><a wicket:id="sort-id">№</a></th>
-				<th><a wicket:id="sort-productName">Наименование</a></th>
-				<th><a wicket:id="sort-price">Цена</a></th>
-				<th><a wicket:id="sort-currentQuantity">Колличество</a></th>
-				<th><a wicket:id="sort-unit">Ед.изм.</a></th>
-				<th><a wicket:id="sort-sklad">Склад</a></th>
-				<th><a> Действие</a></th>
+				<th><a wicket:id="sort-productName"><wicket:message key="name.product" /></a></th>
+				<th><a wicket:id="sort-price"><wicket:message key="price.product" /></a></th>
+				<th><a wicket:id="sort-currentQuantity"><wicket:message key="quantity.product" /></a></th>
+				<th><a wicket:id="sort-unit"><wicket:message key="unit.product" /></a></th>
+				<th><a wicket:id="sort-sklad"><wicket:message key="sklad.product" /></a></th>
+				<th><a> <wicket:message key="action" /></a></th>
 			</tr>
 
 		</thead>
@@ -22,11 +24,12 @@
 				<td><span wicket:id="currentQuantity" /></td>
 				<td><span wicket:id="unit"/></td>
 				<td><span wicket:id="sklad" /></td>
-<!--  <td colspan="2">
-					<button wicket:id="save">Сохранить</button>
-					<button wicket:id="cancel">Отменить</button>
-				</td>-->
-				<td><button wicket:id="delete-link">Удалить</button> <button wicket:id="edit-link">Изменить</button></td>
+
+				
+							
+				<td> <button class="new" wicket:id="edit-link"><wicket:message key="btn.create.edit" /><img src="edit.png" alt="" style="vertical-align:middle; border-radius: 10px;"></button>
+				<button class="new" wicket:id="delete-link"  > <wicket:message key="btn.create.delete" /><img src="delete.png" alt="" style="vertical-align:middle; border-radius: 10px;"> 	
+				</button></td>
 			</tr>
 		</tbody>
 	</table>

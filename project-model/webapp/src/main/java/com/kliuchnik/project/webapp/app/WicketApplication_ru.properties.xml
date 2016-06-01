@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="btn.create.product">Создать продукт</entry>
+	<entry key="btn.create.product">Создать продукт </entry>
+	<entry key="btn.create.order">Создать заказ </entry>
+	<entry key="btn.create.sklad">Создать склад </entry>
+	<entry key="btn.create.customer">Создать покупателя </entry>
+	<entry key="btn.create.delete">Удалить </entry>
+	<entry key="btn.create.edit">Изменить </entry>
+	<entry key="logo">Учет товаров на складе </entry>
+
+
 
 	<entry key="menu.home">Домашняя</entry>
 	<entry key="menu.products">Продукты</entry>
 	<entry key="menu.sklad">Склад</entry>
 	<entry key="menu.orders">Заказы</entry>
 	<entry key="menu.customers">Покупатели</entry>
-	
+
 	<entry key="menu.logout">Выход</entry>
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>
@@ -16,12 +24,29 @@
 	<entry key="product.saved">Продукт сохранен</entry>
 
 
-	<entry key="products.price">Базовая цена</entry>
+	<entry key="name.sklad">Название склада </entry>
+	<entry key="name.product">Наименование </entry>
+	<entry key="price.product">Цена </entry>
+	<entry key="quantity.product">Колличество </entry>
+	<entry key="unit.product">Ед.изм.</entry>
+	<entry key="sklad.product">Склад </entry>
+	<entry key="action">Действие </entry>
+
+<entry key="date">Дата </entry>
+<entry key="sum">Cумма</entry>
+ <entry key="customer">Покупатель</entry>
+ <entry key="customer.name">ФИО</entry>
+<entry key="customer.password">Пароль</entry>
+<entry key="customer.address">Адрес</entry>
+<entry key="customer.bankr">Реквизиты</entry>
+
+
+
 
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
 
-	<entry key="products.price.title">введите цену</entry>
+	<entry key="products.price.title">Введите цену</entry>
 
 
 </properties>

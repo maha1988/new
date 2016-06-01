@@ -8,6 +8,7 @@ import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.Sklad;
@@ -67,6 +68,7 @@ public class CustomersPage extends AbstractPage {
 
             }
         });
+        add(new FeedbackPanel("feedback"));
     }
 }
  

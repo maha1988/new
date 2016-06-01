@@ -8,7 +8,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.form.Form;
-
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import com.kliuchnik.project.datamodel.Sklad;
 import com.kliuchnik.project.webapp.page.AbstractPage;
@@ -63,6 +63,7 @@ public class SkladPage extends AbstractPage {
 
 	            }
 	        });
+	        add(new FeedbackPanel("feedback"));
 	    }
 	}
 	 

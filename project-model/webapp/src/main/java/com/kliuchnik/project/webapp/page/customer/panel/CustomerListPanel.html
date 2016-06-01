@@ -1,17 +1,17 @@
 <wicket:panel>
-<meta charset="utf-8" />
+	<meta charset="utf-8" />
 	<table cellspacing="0" class="list-table" align="center">
 		<thead>
 
 			<tr>
 				<th><a wicket:id="sort-id">№</a></th>
-				<th><a wicket:id="sort-name">ФИО</a></th>
-				<th><a wicket:id="sort-password">Пароль</a></th>
-				<th><a wicket:id="sort-address">Адрес</a></th>
-				<th><a wicket:id="sort-bank">Банк.реквизиты</a></th>
+				<th><a wicket:id="sort-name"><wicket:message key="customer.name" /></a></th>
+				<th><a wicket:id="sort-password"><wicket:message key="customer.password" /></a></th>
+				<th><a wicket:id="sort-address"><wicket:message key="customer.address" /></a></th>
+				<th><a wicket:id="sort-bank"><wicket:message key="customer.bankr" /></a></th>
 
-				<th><a>Действие</a></th>
-		</tr>
+				<th><a><wicket:message key="action" /></a></th>
+			</tr>
 
 		</thead>
 		<tbody>
@@ -23,12 +23,19 @@
 				<td><span wicket:id="bank" /></td>
 
 
-
-				<td><button wicket:id="delete-link">Удалить</button> <button wicket:id="edit-link">Изменить</button></td>
+				<td>
+					<button class="new" wicket:id="edit-link">
+						<wicket:message key="btn.create.edit" /><img src="edit.png" alt=""
+							style="vertical-align: middle; border-radius: 10px;">
+					</button>
+					<button class="new" wicket:id="delete-link">
+					<wicket:message key="btn.create.delete" /><img src="delete.png" alt=""
+							style="vertical-align: middle; border-radius: 10px;">
+					</button>
+				</td>
 			</tr>
 		</tbody>
-
 	</table>
-	<div wicket:id="paging" align="center"></div>
+	<div class="pg" wicket:id="paging" align="center"></div>
 
 </wicket:panel>

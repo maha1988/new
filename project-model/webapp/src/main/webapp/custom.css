@@ -13,8 +13,8 @@ font-weight: bold;
 }
  table.list-table  th {
 padding: 10px 20px;
-background: #EA0498;
-color: #400040;
+background: #827373;
+color:   color: #222222;
 border-right: 2px solid; s
 font-size: 0.9em;
 }
@@ -37,7 +37,7 @@ border-right: 2px solid #56433D;
  table.list-table td:first-child {
      
 border-left: 2px solid #56433D;
-border-right: none;
+border-right: 2px solid #56433D;
 }
 table.list-table  td:nth-child(2){
 text-align: left;

@@ -79,7 +79,6 @@ public class ProductEditPanel extends Panel {
 		TextField<BigDecimal> priceFild = new TextField<BigDecimal>("price");
 		priceFild.setRequired(true);
 		priceFild.add(RangeValidator.<BigDecimal> range(new BigDecimal(0), new BigDecimal(1_000_000_000_000_000.00)));
-		priceFild.setLabel(new ResourceModel("products.price"));
 		form.add(priceFild);
 		
 		TextField<Long> currentQuantityField = new TextField<>("currentQuantity");

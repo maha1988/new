@@ -4,9 +4,8 @@
 		<thead>
 			<tr>
 				<th><a wicket:id="sort-id">№</a></th>
-				<th><a wicket:id="sort-name">Наименование</a></th>
-			<!--  	<th><a wicket:id="sort-products">Products</a></th>-->
-				<th> <a>Действие </a></th>
+				<th><a wicket:id="sort-name"><wicket:message key="name.sklad" /></a></th>
+				<th> <a><wicket:message key="action" /> </a></th>
 
 			</tr>
 
@@ -16,10 +15,11 @@
 				<td><span wicket:id="id" /></td>
 				<td><span wicket:id="name" /></td>
 				
-				<td><button wicket:id="delete-link">Удалить</button> <button wicket:id="edit-link">Изменить</button></td>
+				<td> <button class="new" wicket:id="edit-link"><wicket:message key="btn.create.edit" /><img src="edit.png" alt="" style="vertical-align:middle; border-radius: 10px;"></button>
+				<button class="new" wicket:id="delete-link"  > <wicket:message key="btn.create.delete" /><img src="delete.png" alt="" style="vertical-align:middle; border-radius: 10px;"> 	
+				</button></td>
 			</tr>
 		</tbody>
 	</table>
-	<div wicket:id="paging" align="center"></div>
-
-</wicket:panel>
+	<div   class="pg" wicket:id="paging" align="center"></div>
+	</wicket:panel>
