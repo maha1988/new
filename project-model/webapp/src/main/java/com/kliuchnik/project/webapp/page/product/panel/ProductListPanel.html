@@ -22,11 +22,14 @@
 				<td><span wicket:id="currentQuantity" /></td>
 				<td><span wicket:id="unit"/></td>
 				<td><span wicket:id="sklad" /></td>
-
-				<td><a wicket:id="delete-link">Удалить</a>/ <a wicket:id="edit-link">Изменить</a></td>
+<!--  <td colspan="2">
+					<button wicket:id="save">Сохранить</button>
+					<button wicket:id="cancel">Отменить</button>
+				</td>-->
+				<td><button wicket:id="delete-link">Удалить</button> <button wicket:id="edit-link">Изменить</button></td>
 			</tr>
 		</tbody>
 	</table>
-	<div wicket:id="paging" align="center"></div>
+	<div   class="pg" wicket:id="paging" align="center"></div>
 
 </wicket:panel>

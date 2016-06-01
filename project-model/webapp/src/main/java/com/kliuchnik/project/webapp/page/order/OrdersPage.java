@@ -10,7 +10,7 @@ import org.apache.wicket.markup.html.form.Form;
 import com.kliuchnik.project.datamodel.Order;
 import com.kliuchnik.project.webapp.page.AbstractPage;
 import com.kliuchnik.project.webapp.page.order.panel.OrderListPanel;
-@AuthorizeInstantiation(value = {"ADMIN",	"CUSTOMER"})
+@AuthorizeInstantiation(value = {"ADMIN"	})
 public class OrdersPage extends AbstractPage {
 
 	 @Override

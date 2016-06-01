@@ -9,6 +9,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.kliuchnik.project.webapp.app.AuthorizedSession;
+import com.kliuchnik.project.webapp.component.localization.LanguageSelectionComponent;
 import com.kliuchnik.project.webapp.component.menu.MenuCustomer;
 import com.kliuchnik.project.webapp.component.menu.MenuPanel;
 
@@ -27,6 +28,7 @@ public abstract class AbstractPage extends WebPage {
 	    @Override
 	    protected void onInitialize() {
 	        super.onInitialize();
+	        add(new LanguageSelectionComponent("language-select"));
 
 	        if (admin  ) {
 				add(new MenuPanel("menu-panel"));
@@ -35,10 +37,8 @@ public abstract class AbstractPage extends WebPage {
 				add(new MenuCustomer("menu-panel"));
 			}
 	        
+	       
 	        
-	        
-	        
-	   
 	                
 	        AbstractReadOnlyModel<Integer> yearModel = new AbstractReadOnlyModel<Integer>() {
 	            @Override

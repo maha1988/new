@@ -27,13 +27,15 @@ import com.kliuchnik.project.dataaccess.filters.SkladFilter;
 import com.kliuchnik.project.datamodel.Sklad;
 import com.kliuchnik.project.datamodel.Sklad_;
 import com.kliuchnik.project.service.SkladService;
+import com.kliuchnik.project.webapp.app.AuthorizedSession;
 import com.kliuchnik.project.webapp.page.customer.CustomerEditPanel;
+import com.kliuchnik.project.webapp.page.product.ProductsPage;
 import com.kliuchnik.project.webapp.page.sklad.SkladEditPanel;
 import com.kliuchnik.project.webapp.page.sklad.SkladPage;
 
 
 public class SkladListPanel extends Panel {
-
+	boolean customer = AuthorizedSession.get().getRoles().contains("CUSTOMER");
     @Inject
     private SkladService skladService;
 
@@ -51,30 +53,42 @@ public class SkladListPanel extends Panel {
               //  item.add(new Label("products", new Model(sklad.getProducts());
             
                 
+                Link edit = new Link("edit-link", item.getModel()) {
+
+                    // item.add(new Link<Void>("edit-link") {
+                         @Override
+                         public void onClick() {
+                       //  setResponsePage(new PSkladEditPanel(id, sklad));
+                         }
+                     };
+                     item.add(edit);
                 
                 
-                item.add(new Link<Void>("edit-link") {
-					@Override
-					public void onClick() {
-					//	setResponsePage(new SkladEditPanel( sklad));
-					}
-                }); 
+                Link delete = new Link("delete-link", item.getModel()) {
 
-                item.add(new Link<Void>("delete-link") {
-                    @Override
-                    public void onClick() {
-                        try {
-                           skladService.delete(sklad);
-                        } catch (PersistenceException e) {
-                            System.out.println("caughth persistance exception");
-                        }
+                    //  item.add(new Link<Void>("delete-link") {
+                          @Override
+                          public void onClick() {
+                              try {
+                            	  skladService.delete(sklad);
+                              } catch (PersistenceException e) {
+                                  System.out.println("caughth persistance exception");
+                              }
 
-                        setResponsePage(new SkladPage());
-                    }
-                });  
-            
-            }
-        };
+                              setResponsePage(new SkladPage());
+                          }
+                      };
+                      item.add(delete);
+                      if (customer) {
+                      	delete.setVisible(false);
+      					
+      				}
+
+                  }
+                      };
+               
+ 
+              
         add(dataView);
         add(new PagingNavigator("paging", dataView));
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="btn.create.product">Создать продукт</entry>
+
+	<entry key="menu.home">Домашняя</entry>
+	<entry key="menu.products">Продукты</entry>
+	<entry key="menu.sklad">Склад</entry>
+	<entry key="menu.orders">Заказы</entry>
+	<entry key="menu.customers">Покупатели</entry>
+	
+	<entry key="menu.logout">Выход</entry>
+
+	<entry key="loging.err.auth">ошибка авторизации</entry>
+
+	<entry key="product.saved">Продукт сохранен</entry>
+
+
+	<entry key="products.price">Базовая цена</entry>
+
+	<entry key="US">Английский</entry>
+	<entry key="RU">Русский</entry>
+
+	<entry key="products.price.title">введите цену</entry>
+
+
+</properties>

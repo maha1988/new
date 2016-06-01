@@ -17,6 +17,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -36,7 +37,7 @@ public class ProductEditPanel extends Panel {
 	private ProductService productService;
 	@Inject
 	private SkladService skladService;
-
+	private static final long serialVersionUID = 1L;
 	private Product product;
 	
 	private Sklad sklad;
@@ -62,7 +63,7 @@ public class ProductEditPanel extends Panel {
 //			add(new ProductEditPanel("panel", product, ProductsPage.this));
 //		} else {
 //			add(new ProductEditPanel("panel", ProductsPage.this));
-//		}
+//	}
 		 
 		Form <Product> form = new Form <>("form", new CompoundPropertyModel<>(product));
 		add(form);
@@ -78,6 +79,7 @@ public class ProductEditPanel extends Panel {
 		TextField<BigDecimal> priceFild = new TextField<BigDecimal>("price");
 		priceFild.setRequired(true);
 		priceFild.add(RangeValidator.<BigDecimal> range(new BigDecimal(0), new BigDecimal(1_000_000_000_000_000.00)));
+		priceFild.setLabel(new ResourceModel("products.price"));
 		form.add(priceFild);
 		
 		TextField<Long> currentQuantityField = new TextField<>("currentQuantity");
@@ -105,6 +107,13 @@ public class ProductEditPanel extends Panel {
 	            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 	                super.onSubmit(target, form);
 	                productService.saveOrUpdate(product);
+	                
+	                ProductsPage page = new ProductsPage();
+	                String localizedMessage = getString("product.saved");
+	                page.info(localizedMessage);
+
+	                setResponsePage(page);
+	                
 	                modalWindow.close(target);
 	            }
 	        });

@@ -1,5 +1,7 @@
 package com.kliuchnik.project.webapp.app;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import org.apache.wicket.Session;
@@ -10,7 +12,7 @@ import org.apache.wicket.request.Request;
 
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.service.UserService;
-
+import com.kliuchnik.project.webapp.component.localization.LanguageSelectionComponent;
 
 
 public class AuthorizedSession extends AuthenticatedWebSession {
@@ -27,6 +29,16 @@ public class AuthorizedSession extends AuthenticatedWebSession {
 
     }
 
+    @Override
+    public Locale getLocale() {
+        Locale locale = super.getLocale();
+        if (locale == null || !LanguageSelectionComponent.SUPPORTED_LOCALES.contains(locale)) {
+            setLocale(LanguageSelectionComponent.SUPPORTED_LOCALES.get(0));
+        }
+        return super.getLocale();
+    }
+    
+    
     public static AuthorizedSession get() {
         return (AuthorizedSession) Session.get();
     }
@@ -39,7 +51,10 @@ public class AuthorizedSession extends AuthenticatedWebSession {
 
     @Override
     public Roles getRoles() {
-        if (isSignedIn() && (roles != null)) {
+    	
+        if (isSignedIn() && (roles != null || roles == null))
+        //(isSignedIn() && (roles != null)) 
+        {
             roles = new Roles();
             roles.addAll(userService.resolveRoles(loggedUser.getId()));
         }

@@ -26,103 +26,94 @@ import com.kliuchnik.project.datamodel.Order_;
 import com.kliuchnik.project.service.OrderService;
 import com.kliuchnik.project.webapp.page.order.OrdersPage;
 
-
-
 public class OrderListPanel extends Panel {
 
-    @Inject
-    private OrderService orderService;
+	@Inject
+	private OrderService orderService;
 
-    public OrderListPanel(String id) {
-        super(id);
+	public OrderListPanel(String id) {
+		super(id);
 
-        OrderDataProvider orderDataProvider = new OrderDataProvider();
-        DataView<Order> dataView = new DataView<Order>("orderlist", orderDataProvider, 10) {
-            @Override
-            protected void populateItem(Item<Order> item) {
-                Order order = item.getModelObject();
+		OrderDataProvider orderDataProvider = new OrderDataProvider();
+		DataView<Order> dataView = new DataView<Order>("orderlist", orderDataProvider, 10) {
+			@Override
+			protected void populateItem(Item<Order> item) {
+				Order order = item.getModelObject();
 
-                item.add(new Label("id", order.getId()));
-                item.add(DateLabel.forDatePattern("date", Model.of(order.getDate()), "dd-MM-yyyy"));
-                item.add(new Label("sum", order.getSum()));
-               
-               
-                if(order.getCustomer() == null){
-               	 item.add(new Label("customer", "  "));
-               }
-               else {
-            	   item.add(new Label("customer", order.getCustomer().getId()));
-               	
-               }
-                  
-   
-                item.add(new Link<Void>("edit-link") {
-                    @Override
-                    public void onClick() {
-                  //      setResponsePage(new OrderEditPanel(order));
-                    }
-                });
+				item.add(new Label("id", order.getId()));
+				item.add(DateLabel.forDatePattern("date", Model.of(order.getDate()), "dd-MM-yyyy"));
+				item.add(new Label("sum", order.getSum()));
 
-                item.add(new Link<Void>("delete-link") {
-                    @Override
-                    public void onClick() {
-                        try {
-                           orderService.delete( order);
-                        } catch (PersistenceException e) {
-                            System.out.println("caughth persistance exception");
-                        }
+				if (order.getCustomer() == null) {
+					item.add(new Label("customer", "  "));
+				} else {
+					item.add(new Label("customer", order.getCustomer().getId()));
 
-                        setResponsePage(new OrdersPage());
-                    }
-                });  
-            }
-        };
-        add(dataView);
-        add(new PagingNavigator("paging", dataView));
+				}
 
-        add(new OrderByBorder("sort-id", Order_.id, orderDataProvider));
-        add(new OrderByBorder("sort-customer", Order_.customer, orderDataProvider));
-    	add(new OrderByBorder("sort-sum", Order_.sum, orderDataProvider));
-        
-       
-       
-    }
+				item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+						// setResponsePage(new CustomerEditPanel(customer));
+					}
+				});
+				item.add(new Link<Void>("delete-link") {
+					@Override
+					public void onClick() {
+						try {
+							orderService.delete(order);
+						} catch (PersistenceException e) {
+							System.out.println("caughth persistance exception");
+						}
 
-    private class OrderDataProvider extends SortableDataProvider<Order, Serializable> {
+						setResponsePage(new OrdersPage());
+					}
+				});
+			}
+		};
+		add(dataView);
+		add(new PagingNavigator("paging", dataView));
 
-        private OrderFilter orderFilter;
+		add(new OrderByBorder("sort-id", Order_.id, orderDataProvider));
+		add(new OrderByBorder("sort-customer", Order_.customer, orderDataProvider));
+		add(new OrderByBorder("sort-sum", Order_.sum, orderDataProvider));
 
-        public OrderDataProvider() {
-            super();
-            orderFilter = new OrderFilter();
-            orderFilter.setFetchCustomer(true);
-            orderFilter.setFetchProduct(true);  
-            setSort((Serializable) Order_.date, SortOrder.ASCENDING);
-        }
+	}
 
-        @Override
-        public Iterator<Order> iterator(long first, long count) {
-            Serializable property = getSort().getProperty();
-            SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
+	private class OrderDataProvider extends SortableDataProvider<Order, Serializable> {
 
-            orderFilter.setSortProperty((SingularAttribute) property);
-            orderFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
+		private OrderFilter orderFilter;
 
-            orderFilter.setLimit((int) count);
-            orderFilter.setOffset((int) first);
-            return orderService.find(orderFilter).iterator();
-        }
+		public OrderDataProvider() {
+			super();
+			orderFilter = new OrderFilter();
+			orderFilter.setFetchCustomer(true);
+			orderFilter.setFetchProduct(true);
+			setSort((Serializable) Order_.date, SortOrder.ASCENDING);
+		}
 
-        @Override
-        public long size() {
-            return orderService.count(orderFilter);
-        }
+		@Override
+		public Iterator<Order> iterator(long first, long count) {
+			Serializable property = getSort().getProperty();
+			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
 
-        @Override
-        public IModel<Order> model(Order object) {
-            return new Model( object);
-        }
+			orderFilter.setSortProperty((SingularAttribute) property);
+			orderFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
 
-    }
-    }
-    
+			orderFilter.setLimit((int) count);
+			orderFilter.setOffset((int) first);
+			return orderService.find(orderFilter).iterator();
+		}
+
+		@Override
+		public long size() {
+			return orderService.count(orderFilter);
+		}
+
+		@Override
+		public IModel<Order> model(Order object) {
+			return new Model(object);
+		}
+
+	}
+}

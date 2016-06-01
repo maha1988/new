@@ -23,12 +23,13 @@ import com.kliuchnik.project.dataaccess.filters.ProductFilter;
 import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Product_;
 import com.kliuchnik.project.service.ProductService;
+import com.kliuchnik.project.webapp.app.AuthorizedSession;
 import com.kliuchnik.project.webapp.page.product.ProductEditPanel;
 import com.kliuchnik.project.webapp.page.product.ProductsPage;
 
 
 public class ProductListPanel extends Panel {
-
+	boolean customer = AuthorizedSession.get().getRoles().contains("CUSTOMER");
     @Inject
     private ProductService productService;
 
@@ -52,20 +53,24 @@ public class ProductListPanel extends Panel {
                 	 item.add(new Label("sklad", "  "));
                 }
                 else {
-                	 item.add(new Label("sklad", product.getSklad().getId()));
+                	 item.add(new Label("sklad", product.getSklad().getName()));
                 }
                
                
                  
-               
-                item.add(new Link<Void>("edit-link") {
+                Link edit = new Link("edit-link", item.getModel()) {
+
+               // item.add(new Link<Void>("edit-link") {
                     @Override
                     public void onClick() {
-                 //    setResponsePage(new ProductEditPanel(id, product));
+                  //  setResponsePage(new ProductEditPanel(id, product));
                     }
-                });
+                };
+                item.add(edit);
+                
+                Link delete = new Link("delete-link", item.getModel()) {
 
-                item.add(new Link<Void>("delete-link") {
+              //  item.add(new Link<Void>("delete-link") {
                     @Override
                     public void onClick() {
                         try {
@@ -76,8 +81,12 @@ public class ProductListPanel extends Panel {
 
                         setResponsePage(new ProductsPage());
                     }
-                });
-
+                };
+                item.add(delete);
+                if (customer) {
+                	delete.setVisible(false);
+					
+				}
 
             }
                 };

@@ -57,7 +57,7 @@ public class LoginPage extends WebPage {
                     // continueToOriginalDestination();
                     setResponsePage(Application.get().getHomePage());
                 } else {
-                    error("authorization error");
+                	error(getString("loging.err.auth"));
                 }
             }
         });

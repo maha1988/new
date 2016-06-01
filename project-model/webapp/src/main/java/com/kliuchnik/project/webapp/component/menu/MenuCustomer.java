@@ -43,12 +43,7 @@ public class MenuCustomer extends Panel{
 	            }
 	        });
 	       
-	        add(new Link("link-orders") {
-	            @Override
-	            public void onClick() {
-	                setResponsePage(new OrdersPage());
-	            }
-	        });
+	      
 	        Link link = new Link("link-logout") {
 	            @Override
 	            public void onClick() {

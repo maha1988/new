@@ -1,5 +1,7 @@
 package com.kliuchnik.project.webapp.page.product;
 
+import javax.persistence.PersistenceException;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -8,14 +10,17 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import com.kliuchnik.project.datamodel.Product;
+import com.kliuchnik.project.webapp.app.AuthorizedSession;
 import com.kliuchnik.project.webapp.page.AbstractPage;
 import com.kliuchnik.project.webapp.page.product.panel.ProductListPanel;
 @AuthorizeInstantiation(value = {"ADMIN",	"CUSTOMER"})
 
 public class ProductsPage extends AbstractPage {
-		
+	
 	 @Override
 	    protected void onInitialize() {
 	        super.onInitialize();
@@ -44,6 +49,10 @@ public class ProductsPage extends AbstractPage {
 
 	    }
 	 
+	 	            
+	 		 
+	 
+	 
 	 private void addModalWindow(ProductListPanel productListPanel) {
 	        ModalWindow modalWindow = new ModalWindow("modal");
 	        add(modalWindow);
@@ -55,6 +64,8 @@ public class ProductsPage extends AbstractPage {
 	                modalWindow.show(target);
 	            }
 	        });
+	        
+	               
 
 	        modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
 
@@ -64,6 +75,7 @@ public class ProductsPage extends AbstractPage {
 
 	            }
 	        });
+	        add(new FeedbackPanel("feedback"));
 	    }
 	}
 	 
