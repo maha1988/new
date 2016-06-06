@@ -5,11 +5,16 @@
 
 			<tr>
 				<th><a wicket:id="sort-id">№</a></th>
-				<th><a wicket:id="sort-name"><wicket:message key="customer.name" /></a></th>
-				<th><a wicket:id="sort-password"><wicket:message key="customer.password" /></a></th>
+				
+				
+				<th><a wicket:id="sort-firstN"><wicket:message key="customer.firstName" /></a></th>
+				<th><a wicket:id="sort-lastN"><wicket:message key="customer.lastName" /></a></th>
 				<th><a wicket:id="sort-address"><wicket:message key="customer.address" /></a></th>
-				<th><a wicket:id="sort-bank"><wicket:message key="customer.bankr" /></a></th>
-
+				  <th><a wicket:id="sort-bank"><wicket:message key="customer.bankr" /></a></th>
+                <!--<th><a wicket:id="sort-role"><wicket:message key="customer.role" /></a></th>
+                <th><a wicket:id="sort-name"><wicket:message key="customer.name" /></a></th>
+              
+              <th><a wicket:id="sort-password"><wicket:message key="customer.password" /></a></th>  -->
 				<th><a><wicket:message key="action" /></a></th>
 			</tr>
 
@@ -17,20 +22,21 @@
 		<tbody>
 			<tr wicket:id="customerlist">
 				<td><span wicket:id="id" /></td>
-				<td><span wicket:id="name" /></td>
+				<!-- <td><span wicket:id="name" /></td>
 				<td><span wicket:id="password" /></td>
+					<td><span wicket:id="role" /></td> -->
+				<td><span wicket:id="firstN" /></td>
+				<td><span wicket:id="lastN" /></td>
 				<td><span wicket:id="address" /></td>
 				<td><span wicket:id="bank" /></td>
-
+			
 
 				<td>
-					<button class="new" wicket:id="edit-link">
-						<wicket:message key="btn.create.edit" /><img src="edit.png" alt=""
-							style="vertical-align: middle; border-radius: 10px;">
+					<button class="new" wicket:id="edit-link"><wicket:message key="btn.create.edit" />
+						<img src="edit.png" alt="" style="vertical-align: middle; border-radius: 10px;">
 					</button>
-					<button class="new" wicket:id="delete-link">
-					<wicket:message key="btn.create.delete" /><img src="delete.png" alt=""
-							style="vertical-align: middle; border-radius: 10px;">
+					<button class="new" wicket:id="delete-link"><wicket:message key="btn.create.delete" />
+						<img src="delete.png" alt="" style="vertical-align: middle; border-radius: 10px;">
 					</button>
 				</td>
 			</tr>

@@ -143,4 +143,10 @@ input[type=submit] {
 .lt-ie9 {input [type=text], input[type=password] { line-height:34px;
 	
 }
+.language-comp select {
+	position: absolute;
+	top: 2px;
+	right: 10px;
+	border-radius: 5px;
+}
 }

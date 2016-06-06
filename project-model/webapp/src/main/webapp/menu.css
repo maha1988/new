@@ -61,7 +61,7 @@ a:hover {
     background-image: linear-gradient(bottom, #222222 0%, #555555 100%);
     float: left;
     position: relative;
-    width: 16%;    
+    width: 14%;    
 }
 
 #nav li:first-child, #nav li:first-child a { 

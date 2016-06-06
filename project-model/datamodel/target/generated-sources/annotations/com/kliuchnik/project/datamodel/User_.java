@@ -11,6 +11,7 @@ public abstract class User_ extends com.kliuchnik.project.datamodel.AbstractMode
 	public static volatile SingularAttribute<User, String> password;
 	public static volatile SingularAttribute<User, Role> role;
 	public static volatile SingularAttribute<User, String> name;
+	public static volatile SingularAttribute<User, Customer> customer;
 
 }
 

@@ -1,20 +1,15 @@
 package com.kliuchnik.project.webapp.page.product;
 
-import javax.persistence.PersistenceException;
-
 import org.apache.wicket.ajax.AjaxRequestTarget;
-
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import com.kliuchnik.project.datamodel.Product;
-import com.kliuchnik.project.webapp.app.AuthorizedSession;
 import com.kliuchnik.project.webapp.page.AbstractPage;
 import com.kliuchnik.project.webapp.page.product.panel.ProductListPanel;
 @AuthorizeInstantiation(value = {"ADMIN",	"CUSTOMER"})

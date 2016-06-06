@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.kliuchnik.project.dataaccess.CustomerDao;
 import com.kliuchnik.project.dataaccess.UserDao;
 import com.kliuchnik.project.dataaccess.filters.CustomerFilter;
+import com.kliuchnik.project.dataaccess.filters.UserFilter;
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.service.UserService;
@@ -90,6 +92,13 @@ public class UserServiceImpl implements UserService {
 
 		return customerDao.find(userFilter);
 	}
+	@Override
+	public List<User> find(UserFilter userFilter) {
+		
+		LOGGER.info("User find by filter: {}", userFilter);
+
+		return userDao.find(userFilter);
+	}
 
 	@Override
 	public List<User> getAll() {
@@ -103,6 +112,11 @@ public class UserServiceImpl implements UserService {
         return customerDao.count(customerFilter);
     }
 	@Override
+    public long count(UserFilter userFilter) {
+        return userDao.count(userFilter);
+    }
+	
+	@Override
     public User getByNameAndPassword(String userName, String password) {
         return userDao.find(userName, password);
     }
@@ -114,8 +128,7 @@ public class UserServiceImpl implements UserService {
     }
 
 	
-
-	
+   
 	@Override
 	public void delete(Customer customer, User user ) {
 		LOGGER.info("Customer delete: {}", customerDao.get(customer.getId()));
@@ -123,6 +136,11 @@ public class UserServiceImpl implements UserService {
 		userDao.delete(user.getId());	
 	
 	}
-
+	@Override
+	public void delete( User user ) {
+		LOGGER.info("User delete: {}", userDao.get(user.getId()));
+		userDao.delete(user.getId());	
+	
+	}
 	
 }

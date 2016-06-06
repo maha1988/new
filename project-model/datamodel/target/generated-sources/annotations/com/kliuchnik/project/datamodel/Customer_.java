@@ -11,6 +11,8 @@ public abstract class Customer_ extends com.kliuchnik.project.datamodel.Abstract
 
 	public static volatile SingularAttribute<Customer, String> address;
 	public static volatile SingularAttribute<Customer, String> bankR;
+	public static volatile SingularAttribute<Customer, String> firstN;
+	public static volatile SingularAttribute<Customer, String> lastN;
 	public static volatile ListAttribute<Customer, Order> orders;
 	public static volatile SingularAttribute<Customer, User> user;
 

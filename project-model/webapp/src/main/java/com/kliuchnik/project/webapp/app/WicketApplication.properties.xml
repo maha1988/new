@@ -7,6 +7,8 @@
 	<entry key="btn.create.customer">Create customer </entry>
 	<entry key="btn.create.delete">Delete </entry>
 	<entry key="btn.create.edit">Edit </entry>
+	 <entry key="btn.save.product">Save</entry>
+	 <entry key="btn.notsave.product">Сancel</entry>
 	<entry key="logo">Keeping products in stock </entry>
 
 	<entry key="menu.home">Home</entry>
@@ -15,6 +17,7 @@
 	<entry key="menu.customers">Customers</entry>
 	<entry key="menu.orders">Orders</entry>
 	<entry key="menu.logout">Logout</entry>
+	<entry key="menu.users">Users</entry>
 
 	<entry key="loging.err.auth">authorization error</entry>
 
@@ -28,18 +31,32 @@
 	<entry key="sklad.product">Stock </entry>
 	<entry key="action">Action </entry>
 
-   <entry key="date">Date </entry>
-   <entry key="sum">Sum</entry>
-    <entry key="customer">Customer</entry>
-   
-<entry key="customer.name">Name</entry>
-<entry key="customer.password">Password</entry>
-<entry key="customer.address">Address</entry>
-<entry key="customer.bankr">Bank</entry>
+	<entry key="date">Date </entry>
+	<entry key="sum">Sum</entry>
+	<entry key="customer">Customer</entry>
 
+	<entry key="user.Name">Login</entry>
+	<entry key="user.password">Password</entry>
+	<entry key="user.role">Role</entry>
+	<entry key="customer.firstName">First Name</entry>
+	<entry key="customer.lastName">Last Name</entry>
 
+	<entry key="login.toWeb">Login to Web App</entry>
+
+	<entry key="customer.address">Address</entry>
+	<entry key="customer.bankr">Bank</entry>
+
+ <entry key="create.product">Product creation</entry>
+  <entry key="name.product">Name product</entry>
+   <entry key="quantity.product">Quantity </entry>
+   <entry key="unit.product" >Unit </entry>
+    <entry key="price.product" >Price</entry>
+ 
+ 
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>
 
-	<entry key="products.price.title">enter price</entry>
+	<entry key="products.price.title">Enter price</entry>
+	<entry key="products.quantity.title">Enter quantity</entry>
+	<entry key="products.name.title">Enter name</entry>
 </properties>

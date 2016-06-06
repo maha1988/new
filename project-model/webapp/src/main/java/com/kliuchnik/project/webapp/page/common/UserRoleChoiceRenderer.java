@@ -5,7 +5,6 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import com.kliuchnik.project.datamodel.Role;
 
 
-
 public class UserRoleChoiceRenderer extends ChoiceRenderer<Role> {
 
     public static final UserRoleChoiceRenderer INSTANCE = new UserRoleChoiceRenderer();

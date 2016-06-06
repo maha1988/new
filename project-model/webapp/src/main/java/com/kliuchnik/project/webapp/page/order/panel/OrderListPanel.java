@@ -44,10 +44,11 @@ public class OrderListPanel extends Panel {
 				item.add(DateLabel.forDatePattern("date", Model.of(order.getDate()), "dd-MM-yyyy"));
 				item.add(new Label("sum", order.getSum()));
 
-				if (order.getCustomer() == null) {
+				if (order.getCustomer() == null ) {
 					item.add(new Label("customer", "  "));
 				} else {
-					item.add(new Label("customer", order.getCustomer().getId()));
+					
+				item.add(new Label("customer", order.getCustomer().getId()));
 
 				}
 
@@ -87,6 +88,7 @@ public class OrderListPanel extends Panel {
 		public OrderDataProvider() {
 			super();
 			orderFilter = new OrderFilter();
+			orderFilter.setFetchUser(true);
 			orderFilter.setFetchCustomer(true);
 			orderFilter.setFetchProduct(true);
 			setSort((Serializable) Order_.date, SortOrder.ASCENDING);

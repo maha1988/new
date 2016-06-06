@@ -62,6 +62,7 @@ public class UserServiceTest {
 
 		customer.setAddress("Grodno");
 		customer.setBankR("434341212121");
+		
 
 		userService.register(user, customer);
 

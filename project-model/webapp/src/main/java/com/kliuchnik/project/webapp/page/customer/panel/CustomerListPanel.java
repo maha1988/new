@@ -44,11 +44,14 @@ public class CustomerListPanel extends Panel {
 				Customer customer = item.getModelObject();
 
 				item.add(new Label("id", customer.getId()));
+				item.add(new Label("firstN", customer.getFirstN()));
+				item.add(new Label("lastN", customer.getLastN()));
 				item.add(new Label("address", customer.getAddress()));
 				item.add(new Label("bank", customer.getBankR()));
-				item.add(new Label("name", customer.getUser().getName()));
-				item.add(new Label("password", customer.getUser().getPassword()));
-            
+//				item.add(new Label("name", customer.getUser().getName()));
+//				item.add(new Label("password", customer.getUser().getPassword()));
+//				item.add(new Label("role", customer.getUser().getRole()));
+//            
 				item.add(new Link<Void>("edit-link") {
 					@Override
 					public void onClick() {
@@ -79,11 +82,14 @@ public class CustomerListPanel extends Panel {
 		add(new PagingNavigator("paging", dataView));
 
 		add(new OrderByBorder("sort-id", Customer_.id, customerDataProvider));
+		add(new OrderByBorder("sort-firstN", Customer_.firstN, customerDataProvider));
+		add(new OrderByBorder("sort-lastN", Customer_.lastN, customerDataProvider));
 		add(new OrderByBorder("sort-address", Customer_.address, customerDataProvider));
 		add(new OrderByBorder("sort-bank", Customer_.bankR, customerDataProvider));
-		add(new OrderByBorder("sort-name", User_.name, customerDataProvider));
-		add(new OrderByBorder("sort-password", User_.password, customerDataProvider));
-		
+//		add(new OrderByBorder("sort-name", User_.name, customerDataProvider));
+//		add(new OrderByBorder("sort-password", User_.password, customerDataProvider));
+//		add(new OrderByBorder("sort-role", User_.role, customerDataProvider));
+//		
 		
 	}
 

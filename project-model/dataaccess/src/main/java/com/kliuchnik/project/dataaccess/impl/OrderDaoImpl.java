@@ -72,6 +72,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order, Long> implements OrderD
 	        if (orderFilter.isFetchProduct()) {
 	            from.fetch(Order_.products, JoinType.LEFT);
 	        }
+	       
 
 	        // set sort params
 	        if (orderFilter.getSortProperty() != null) {

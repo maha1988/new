@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Customer extends AbstractModel implements Serializable {
-
+	private static final long serialVersionUID = 1L;
 	
 	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -25,12 +25,39 @@ public class Customer extends AbstractModel implements Serializable {
 	
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Order> orders= new ArrayList<Order>();
-
+	
+	@Column
+	private String firstN;
+	@Column
+	private String lastN;
+	
 	@Column
 	private String address;
 	@Column
 	private String bankR;
+	
+	
+	public String getFirstN() {
+		return firstN;
+	}
 
+	public void setFirstN(String firstN) {
+		this.firstN = firstN;
+	}
+
+	public String getLastN() {
+		return lastN;
+	}
+
+	public void setLastN(String lastN) {
+		this.lastN = lastN;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
+	
 	public List<Order> getOrders() {
 		return orders;
 	}
@@ -64,7 +91,8 @@ public class Customer extends AbstractModel implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Customer [user=" + user + ", orders=" + orders + ", address=" + address + ", bankR=" + bankR + "]";
+		return "Customer [user=" + user + ", orders=" + orders + ", firstN=" + firstN + ", lastN=" + lastN
+				+ ", address=" + address + ", bankR=" + bankR + "]";
 	}
 
 }

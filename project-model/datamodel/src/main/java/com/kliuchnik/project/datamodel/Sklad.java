@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Sklad extends AbstractModel implements Serializable {
 
-	
+	private static final long serialVersionUID = 1L;
 
 	@Column
 	private String name;

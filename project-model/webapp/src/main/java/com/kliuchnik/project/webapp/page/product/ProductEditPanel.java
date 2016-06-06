@@ -29,6 +29,7 @@ import com.kliuchnik.project.datamodel.Unit;
 import com.kliuchnik.project.service.ProductService;
 import com.kliuchnik.project.service.SkladService;
 import com.kliuchnik.project.webapp.page.common.SkladChoiceRenderer;
+import com.kliuchnik.project.webapp.page.common.UnitChoiceRender;
 import com.kliuchnik.project.webapp.page.product.panel.ProductListPanel;
 
 public class ProductEditPanel extends Panel {
@@ -44,10 +45,10 @@ public class ProductEditPanel extends Panel {
 	
 	private ModalWindow modalWindow;
 
-	public ProductEditPanel(String id, Product product) {
+	public ProductEditPanel(String id, Product product,ModalWindow modalWindow) {
 		super(id);
 		this.product = product;
-		
+		this.modalWindow = modalWindow;
 	}
 
 	public ProductEditPanel(ModalWindow modalWindow, Product product) {
@@ -89,7 +90,7 @@ public class ProductEditPanel extends Panel {
 		
 		
 		DropDownChoice<Unit> unit = new DropDownChoice<Unit>("unit",
-		new PropertyModel<Unit>(product, "unit"), 
+		new PropertyModel<Unit>(product, "unit" ), 
 		Arrays.asList(Unit.values()));
 		unit.setNullValid(true);
 		form.add(unit);

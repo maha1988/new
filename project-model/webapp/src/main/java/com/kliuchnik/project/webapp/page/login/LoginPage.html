@@ -11,15 +11,18 @@
 
 
 </head>
+
 <body>
 
 	<div class="login">
-
-		<h1 align="center">Вход на сайт</h1>
+		<div wicket:id="language-select" class="language-comp"></div>
+		<h1 align="center">
+			<wicket:message key="login.toWeb" />
+		</h1>
 
 		<form wicket:id="form">
 			<p class="input">
-				<input type="text" wicket:id="username" value=""
+				<input type="text"  wicket:id="username" value=""
 					placeholder="Username " autocomplete="off" />
 			</p>
 			<p class="input">
@@ -29,21 +32,19 @@
 
 			<p class="submit">
 
-				<input type="submit" class="btn waves-effect" wicket:id="submit-btn" name="commit"
-					value="Login">
+				<input type="submit" class="btn waves-effect" wicket:id="submit-btn"
+					name="commit" value="Login">
 			</p>
-			<!-- <p class="btn waves-effect"><input type="submit" wicket:id="submit-btn"  value="Login"></p>
-			  <button type="submit" class="btn waves-effect" wicket:id="submit-btn">
-				<b>login</b>
-			</button>-->
+
 
 		</form>
 
 		<div wicket:id="feedbackpanel"></div>
+
+
 	</div>
 
 </body>
-
 
 
 

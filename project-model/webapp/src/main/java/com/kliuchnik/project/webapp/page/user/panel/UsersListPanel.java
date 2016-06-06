@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.apache.wicket.authorization.Action;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
@@ -20,89 +20,110 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import com.kliuchnik.project.dataaccess.filters.CustomerFilter;
-import com.kliuchnik.project.datamodel.Customer;
-import com.kliuchnik.project.datamodel.Customer_;
+import com.kliuchnik.project.dataaccess.filters.UserFilter;
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.datamodel.User_;
 import com.kliuchnik.project.service.UserService;
-import com.kliuchnik.project.webapp.page.user.UsersEditPage;
+import com.kliuchnik.project.webapp.page.user.UsersPage;
 
-
-
-@AuthorizeAction(roles = { "admin" }, action = Action.RENDER)
 public class UsersListPanel extends Panel {
 
-    @Inject
-    private UserService userService;
+	@Inject
+	private UserService userService;
+	private User user;
+	private ModalWindow modalWindow;
 
-    public UsersListPanel(String id) {
-        super(id);
+	
 
-        UsersDataProvider userDataProvider = new UsersDataProvider();
-        DataView<Customer> dataView = new DataView<Customer>("userlist", userDataProvider, 10) {
-            @Override
-            protected void populateItem(Item<Customer> item) {
-            	Customer user = item.getModelObject();
-            	
-            	item.add(new Label("id", user.getId()));
-				item.add(new Label("name", user.getUser().getName()));
-				item.add(new Label("password", user.getUser().getPassword()));
-				item.add(new Label("role",user.getUser().getRole()));
-				
-                item.add(new Link<Void>("edit-link") {
-                    @Override
-                    public void onClick() {
-                        setResponsePage(new UsersEditPage(user));
-                    }
-                });
+	public UsersListPanel(ModalWindow modalWindow, User user) {
+		super(modalWindow.getContentId());
+		this.user = user;
+		this.modalWindow = modalWindow;	
+	}
 
-            }
-        };
-        add(dataView);
-        add(new PagingNavigator("paging", dataView));
-        add(new OrderByBorder("sort-id", User_.id, userDataProvider));
-        add(new OrderByBorder("sort-name", User_.name, userDataProvider));
-        add(new OrderByBorder("sort-password", User_.password, userDataProvider));
-        add(new OrderByBorder("sort-role", User_.role, userDataProvider));
-      
-    }
+		
+	
+	public UsersListPanel(String id) {
+		super(id);
 
-    private class UsersDataProvider extends SortableDataProvider<Customer, Serializable> {
+		UserDataProvider userDataProvider = new UserDataProvider();
+		DataView<User> dataView = new DataView<User>("userlist", userDataProvider, 10) {
+			@Override
+			protected void populateItem(Item<User> item) {
+				User user = item.getModelObject();
 
-    	private CustomerFilter customerFilter;
+				item.add(new Label("id", user.getId()));
+				item.add(new Label("name", user.getName()));
+				item.add(new Label("password", user.getPassword()));
+				item.add(new Label("role", user.getRole()));
 
-		public UsersDataProvider() {
+
+
+				item.add(new Link<Void>("edit-link") {
+					@Override
+					public void onClick() {
+						// setResponsePage(new CustomerEditPanel(customer));
+					}
+				});
+				item.add(new Link<Void>("delete-link") {
+					@Override
+					public void onClick() {
+						try {
+							userService.delete(user);
+						} catch (PersistenceException e) {
+							System.out.println("caughth persistance exception");
+						}
+
+						setResponsePage(new UsersPage());
+					}
+				});
+			}
+		};
+		add(dataView);
+		add(new PagingNavigator("paging", dataView));
+
+		add(new OrderByBorder("sort-id", User_.id, userDataProvider));
+		add(new OrderByBorder("sort-name", User_.name, userDataProvider));
+		add(new OrderByBorder("sort-password", User_.password, userDataProvider));
+		add(new OrderByBorder("sort-role", User_.role, userDataProvider));
+
+	}
+
+	private class UserDataProvider extends SortableDataProvider<User, Serializable> {
+
+		private UserFilter userFilter;
+
+		public UserDataProvider() {
 			super();
-			customerFilter = new CustomerFilter();
-			customerFilter.setFetchUser(true);
-			setSort((Serializable) Customer_.user, SortOrder.ASCENDING);
+			userFilter = new UserFilter();
+			
+			userFilter.setFetchCustomer(true);
+			
+			setSort((Serializable) User_.name, SortOrder.ASCENDING);
 		}
 
-
 		@Override
-		public Iterator<Customer> iterator(long first, long count) {
+		public Iterator<User> iterator(long first, long count) {
 			Serializable property = getSort().getProperty();
 			SortOrder propertySortOrder = getSortState().getPropertySortOrder(property);
 
-			customerFilter.setSortProperty((SingularAttribute) property);
-			customerFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
+			userFilter.setSortProperty((SingularAttribute) property);
+			userFilter.setSortOrder(propertySortOrder.equals(SortOrder.ASCENDING) ? true : false);
 
-			customerFilter.setLimit((int) count);
-			customerFilter.setOffset((int) first);
-			return userService.find(customerFilter).iterator();
+			userFilter.setLimit((int) count);
+			userFilter.setOffset((int) first);
+			return userService.find(userFilter).iterator();
 		}
 
-        @Override
-        public long size() {
-            return userService.count(customerFilter);
-        }
+		@Override
+		public long size() {
+			return userService.count(userFilter);
+		}
 
-        @Override
-        public IModel<Customer> model(Customer object) {
-            return new Model(object);
-        }
+		@Override
+		public IModel<User> model(User object) {
+			return new Model(object);
+		}
 
-    }
-    }
-
+	}
+}

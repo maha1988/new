@@ -52,6 +52,12 @@ public class MenuPanel extends Panel {
                 setResponsePage(new CustomersPage());
             }
         });
+        add(new Link("link-users") {
+            @Override
+            public void onClick() {
+                setResponsePage(new  UsersPage());
+            }
+        });
         
         add(new Link("link-orders") {
             @Override

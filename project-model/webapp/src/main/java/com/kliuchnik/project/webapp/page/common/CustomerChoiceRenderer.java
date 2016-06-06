@@ -15,7 +15,7 @@ public class CustomerChoiceRenderer extends ChoiceRenderer<Customer> {
 
     @Override
     public Object getDisplayValue(Customer object) {
-        return object.getUser().getId();
+        return object.getLastN();
     }
 
     @Override

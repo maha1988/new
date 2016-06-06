@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
@@ -24,7 +25,6 @@ import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Product_;
 import com.kliuchnik.project.service.ProductService;
 import com.kliuchnik.project.webapp.app.AuthorizedSession;
-import com.kliuchnik.project.webapp.page.product.ProductEditPanel;
 import com.kliuchnik.project.webapp.page.product.ProductsPage;
 
 
@@ -32,7 +32,11 @@ public class ProductListPanel extends Panel {
 	boolean customer = AuthorizedSession.get().getRoles().contains("CUSTOMER");
     @Inject
     private ProductService productService;
-
+    
+    public ProductListPanel(String id, Product product,ModalWindow modalWindow) {
+		super(id);
+		
+    }
     public ProductListPanel(String id) {
         super(id);
 
@@ -60,10 +64,11 @@ public class ProductListPanel extends Panel {
                  
                 Link edit = new Link("edit-link", item.getModel()) {
 
-               // item.add(new Link<Void>("edit-link") {
+             	// item.add(new Link<Void>("edit-link") {
                     @Override
                     public void onClick() {
-                  //  setResponsePage(new ProductEditPanel(id, product));
+                  
+				//	setResponsePage( new ProductEditPanel(id, product, modalWindow));
                     }
                 };
                 item.add(edit);
@@ -100,7 +105,7 @@ public class ProductListPanel extends Panel {
         add(new OrderByBorder("sort-price", Product_.price, productsDataProvider));
         add(new OrderByBorder("sort-sklad", Product_.sklad, productsDataProvider));
     }
-
+   
     private class ProductsDataProvider extends SortableDataProvider<Product, Serializable> {
 
         private ProductFilter productFilter;

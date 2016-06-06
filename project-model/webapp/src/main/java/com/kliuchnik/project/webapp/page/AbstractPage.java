@@ -25,7 +25,13 @@ public abstract class AbstractPage extends WebPage {
 	        super(parameters);
 	    }
 
-	    @Override
+	    
+
+		public AbstractPage(String contentId) {
+			
+		}
+
+		@Override
 	    protected void onInitialize() {
 	        super.onInitialize();
 	        add(new LanguageSelectionComponent("language-select"));

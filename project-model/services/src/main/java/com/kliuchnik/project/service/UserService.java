@@ -6,11 +6,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.kliuchnik.project.dataaccess.filters.CustomerFilter;
+import com.kliuchnik.project.dataaccess.filters.SkladFilter;
+import com.kliuchnik.project.dataaccess.filters.UserFilter;
 import com.kliuchnik.project.datamodel.Customer;
 import com.kliuchnik.project.datamodel.User;
 
 public interface UserService {
-
+	
 	@Transactional
 	void register(User user, Customer customer);
 
@@ -29,18 +31,27 @@ public interface UserService {
 	
 	@Transactional
 	void saveOrUpdate(User user);
-
+	
+	@Transactional
+	void delete( User user);
+	
 	@Transactional
 	void delete(Customer customer, User user);
 
 	List<Customer> find(CustomerFilter customerFilter);
+	List<User> find(UserFilter userFilter);
+	
+	
 	
 	List<User> getAll();
 	
 	long count(CustomerFilter customerFilter);
+	
 
 	User getByNameAndPassword(String userName, String password);
 
 	Collection<? extends String> resolveRoles(Long id);
+
+	long count(UserFilter userFilter);
 
 }

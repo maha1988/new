@@ -2,16 +2,20 @@ package com.kliuchnik.project.datamodel;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
 public class User extends AbstractModel implements Serializable{
-
+	private static final long serialVersionUID = 1L;
 
 	@Column
 	private String name;
@@ -24,7 +28,18 @@ public class User extends AbstractModel implements Serializable{
 	@Column
 	private Role role;
 	
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(nullable = false, updatable = false, name = "id")
+    private Customer customer;
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	public String getName() {
 		return name;
 	}

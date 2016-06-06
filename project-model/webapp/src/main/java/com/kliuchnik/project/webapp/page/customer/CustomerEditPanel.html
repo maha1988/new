@@ -1,11 +1,14 @@
 <wicket:panel>
 <meta charset="utf-8" />
 	<h2>Customer edit</h2>
-	<form wicket:id="form">
 
+	
+ <form wicket:id="form">
+	
 		<table>
-			 <tr>
-				<td><b>Имя:</b></td>
+			 
+		 <!--  <tr>
+				<td><b>Логин:</b></td>
 				<td><input type="text" wicket:id="name" /></td>
 			</tr>
 									
@@ -18,6 +21,18 @@
 				<td><b>Пароль:</b></td>
 				<td><input type="text" wicket:id="password" /></td>
 			</tr>
+			 -->
+			<tr>
+				<td><b>Имя:</b></td>
+				<td><input type="text" wicket:id="firstN" /></td>
+			</tr>
+			
+			<tr>
+				<td><b>Фамилия:</b></td>
+				<td><input type="text" wicket:id="lastN" /></td>
+			</tr>
+			
+			
 			<tr>
 				<td><b>Адрес:</b></td>
 				<td><input type="text" wicket:id="address" /></td>
@@ -35,6 +50,11 @@
 			</tr>
 			
 		</table>
-	</form>
+	
+ </form> 
+ 
+ 
+ 
+ 
  
 </wicket:panel>

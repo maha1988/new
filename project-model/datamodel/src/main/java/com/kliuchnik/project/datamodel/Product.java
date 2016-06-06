@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Product extends AbstractModel  implements Serializable{
- 
+	private static final long serialVersionUID = 1L;
 
 	@Column (name= "product_name")
 	private String productName;

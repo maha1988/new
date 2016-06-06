@@ -1,5 +1,6 @@
 package com.kliuchnik.project.webapp.page.customer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.inject.Inject;
@@ -22,6 +23,7 @@ import com.kliuchnik.project.datamodel.Role;
 import com.kliuchnik.project.datamodel.Unit;
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.service.UserService;
+import com.kliuchnik.project.webapp.page.common.UserRoleChoiceRenderer;
 
 public class CustomerEditPanel extends Panel {
 
@@ -42,50 +44,77 @@ public class CustomerEditPanel extends Panel {
 		this.user = user;
 		this.modalWindow = modalWindow;
 	}
+	public CustomerEditPanel(String id) {
+		super(id);
+		user = new User();
+		customer = new Customer();
+
+	}
+	public CustomerEditPanel(String id, Customer customer) {
+		super(id);
+		this.customer = customer;
+		this.user = customer.getUser();
+
+	}
+
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
-		Form<Customer> form = new Form<>("form", new CompoundPropertyModel<>(customer));
+		Form  form = new Form ("form", new CompoundPropertyModel<>(customer));
 		add(form);
-
+		TextField<String> firstNField = new TextField<>("firstN");
+		firstNField.setRequired(true);
+		firstNField.add(StringValidator.maximumLength(100));
+		form.add(firstNField);
+		
+		TextField<String> lastNField = new TextField<>("lastN");
+		lastNField.setRequired(true);
+		lastNField.add(StringValidator.maximumLength(100));
+		form.add(lastNField);
+		
 		TextField<String> addressField = new TextField<>("address");
 		addressField.setRequired(true);
 		addressField.add(StringValidator.maximumLength(100));
 		form.add(addressField);
 
-		
-		TextField<String> nameField = new TextField<String>("name",
-				new PropertyModel<>(user, "name"));
-		nameField.setRequired(true);
-		nameField.add(StringValidator.maximumLength(100));
-		nameField.add(StringValidator.minimumLength(2));
-		form.add(nameField);
-		
-		
 		TextField<String> bankRField = new TextField<>("bankR");
 		bankRField.setRequired(true);
 		bankRField.add(StringValidator.maximumLength(100));
 		form.add(bankRField);
+		
+			
+//		
+//		TextField<String> nameField = new TextField<String>("name",
+//				new PropertyModel<>(user, "name"));
+//		nameField.setRequired(true);
+//		nameField.add(StringValidator.maximumLength(100));
+//		nameField.add(StringValidator.minimumLength(2));
+//		form.add(nameField);
+//		
+//		
+//		
+//
+//		TextField<String> passwordField = new TextField<>("password",
+//			new PropertyModel<>(user, "password"));
+//		passwordField.setRequired(true);
+//		passwordField.add(StringValidator.maximumLength(100));
+//		form.add(passwordField);
+//
+//		
+//		DropDownChoice<Role> role = new DropDownChoice<>("role",new PropertyModel<>(user, "role"),  Arrays.asList(Role.values()));
+//		role.setRequired(true);
+//		form.add(role);
 
-		TextField<String> passwordField = new TextField<>("password",
-			new PropertyModel<>(user, "password"));
-		passwordField.setRequired(true);
-		passwordField.add(StringValidator.maximumLength(100));
-		form.add(passwordField);
-
-		DropDownChoice<Role> role = new DropDownChoice<Role>("role",
-				new PropertyModel<Role>(user, "role"),
-		Arrays.asList(Role.values()));
-		role.setNullValid(true);
-		form.add(role);
-
+					
+		
 		form.add(new AjaxSubmitLink("save") {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				 super.onSubmit(target, form);
-	                userService.saveOrUpdate(customer);
+	               
+				 userService.saveOrUpdate(customer);
 	                userService.saveOrUpdate(user);
 	                modalWindow.close(target);
 			}

@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.kliuchnik.project.dataaccess.UserDao;
+import com.kliuchnik.project.dataaccess.filters.UserFilter;
 import com.kliuchnik.project.datamodel.User;
 import com.kliuchnik.project.datamodel.User_;
 
@@ -49,6 +50,16 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao 
             throw new IllegalArgumentException("more than 1 user found ");
         }
     }
+	@Override
+	public List<User> find(UserFilter userFilter) {
+		
+		return null;
+	}
+	@Override
+	public long count(UserFilter userFilter) {
+		
+		return 0;
+	}
 } 
 	 	 	  
 
