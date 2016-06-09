@@ -1,39 +1,43 @@
 <wicket:panel>
-<meta charset="utf-8" />
-	<h2>Order edit</h2>
+
+<head>
+	
+	
+	<meta charset="utf-8" />
+	</head>
+	<h2 class="modal-title" id="myModalLabel"><wicket:message key="create.order" /></h2>
+	
 	<form wicket:id="form">
 
 		<table>
+			<tr>
+				<td><b><wicket:message  key="customer" /></b></td>
+				<td><select wicket:id="customer"></select></td>
 			
+			</tr> 
+			 
+			<tr>
+				<td><b><wicket:message  key="data" /></b></td>
+				<td><input type="text" wicket:id="date" /></td>
+			</tr>
 			
 			<tr>
-				<td><b>product:</b></td>
+				<td><b><wicket:message  key="menu.products"/></b></td>
 				<td><span wicket:id="products" /></td>
 			</tr>
 			
 			
 			<tr>
-				<td><b>Sum:</b></td>
+				<td><b><wicket:message  key="sum" /></b></td>
 				<td><input type="text" wicket:id="sum" /></td>
 			</tr>
 			 
-			 
-			 
-			 
-			 <tr>
-				<td><b>Customer:</b></td>
-				<td><select wicket:id="customer"></select></td>
+		 
 			
-				
-			</tr> 
-			<tr>
-				<td><b>Date:</b></td>
-				<td><input type="text" wicket:id="date" /></td>
-			</tr>
 			<tr>
 				<td colspan="2">
-					<button wicket:id="save">Сохранить</button>
-					<button wicket:id="cancel">Отменить</button>
+					<button wicket:id="save"> <wicket:message key="btn.save.product" /></button>
+					<button wicket:id="cancel"><wicket:message key="btn.notsave.product" /></button>
 				</td>
 			</tr>
 		</table>

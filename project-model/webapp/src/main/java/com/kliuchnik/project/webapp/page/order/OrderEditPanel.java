@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.CollectionModel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -70,8 +71,33 @@ public class OrderEditPanel extends Panel {
         final Palette<Product> palette = new Palette<Product>("products", Model.ofList(order.getProducts()), new CollectionModel<Product>(
         		allProducts), ProductChoiceRenderer.INSTANCE, 15, false, true);
         palette.add(new DefaultTheme());
+//        palette.add (new AjaxFormComponentUpdatingBehavior("change") {
+//			@Override
+//			protected void onUpdate(AjaxRequestTarget target) {
+//				for order.getProducts()
+//			
+//							
+//				
+//                protected void onUpdate(AjaxRequestTarget target) { 
+//                           
+//
+//                           Iterator selectedChoices = 
+//myPalette.getSelectedChoices(); 
+//
+//                           // let the image panel do something with the selected choices. 
+//                           target.addComponent(imgPanel); 
+//
+//}); 
+//
+//				
+//			}
+//			
+//		});
         form.add(palette);
 		
+        
+        
+        
 		TextField<BigDecimal> sumField = new TextField<>("sum");
 		sumField.add(RangeValidator.<BigDecimal> range(new BigDecimal(0), new BigDecimal(1_000_000_000_000_000.00)));
 		sumField.setRequired(true);

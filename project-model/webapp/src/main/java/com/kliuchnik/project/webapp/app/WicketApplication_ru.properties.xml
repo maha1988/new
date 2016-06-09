@@ -9,6 +9,8 @@
 	<entry key="btn.create.order">Создать заказ </entry>
 	<entry key="btn.create.sklad">Создать склад </entry>
 	<entry key="btn.create.customer">Создать покупателя </entry>
+	<entry key="btn.create.user">Создать пользователя </entry>
+	
 	<entry key="btn.create.delete">Удалить </entry>
 	<entry key="btn.create.edit">Изменить </entry>
 	<entry key="logo">Учет товаров на складе </entry>
@@ -31,7 +33,7 @@
 
 	<entry key="n.product">№ </entry>
 	<entry key="name.sklad">Название склада </entry>
-	<entry key="name.product">Наименование </entry>
+	
 	<entry key="price.product">Цена </entry>
 	<entry key="quantity.product">Колличество </entry>
 	<entry key="unit.product">Ед.изм.</entry>
@@ -49,15 +51,25 @@
 	<entry key="customer.bankr">Реквизиты</entry>
 	<entry key="user.role">Роль</entry>
 	<entry key="login.toWeb">Вход на сайт</entry>
+	
+	
+	<entry key="create.user">Карточка пользователя</entry>
 	<entry key="create.product">Карточка продукта</entry>
-	<entry key="name.product">Название продукта</entry>
+	<entry key="create.skald">Карточка склада</entry>
+	<entry key="create.order">Заказ</entry>
+	<entry key="create.customer">Карточка покупателя</entry>
+	
+	
+	
+	<entry key="n.product">Название продукта</entry>
 	<entry key="quantity.product">Колличество </entry>
 	<entry key="unit.product">Ед.измерения </entry>
 	<entry key="price.product">Цена</entry>
 	<entry key="btn.save.product">Сохранить</entry>
 	<entry key="btn.notsave.product">Отменить</entry>
 
-
+<entry key="data">Дата</entry>
+<entry key="sum">Сумма</entry>
 
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
@@ -65,6 +77,7 @@
 	<entry key="products.price.title">Введите цену</entry>
 	<entry key="products.quantity.title">Введите колличество</entry>
 	<entry key="products.name.title">Введите название</entry>
+	<entry key="sklad.name.title">Введите название склада</entry>
 	
 
 

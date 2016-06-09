@@ -45,6 +45,7 @@ public class SkladPage extends AbstractPage {
 	 
 	 private void addModalWindow(SkladListPanel skladListPanel) {
 	        ModalWindow modalWindow = new ModalWindow("modal");
+	        modalWindow.setTitle("Карточка склада");
 	        add(modalWindow);
 
 	        add(new AjaxLink("create") {

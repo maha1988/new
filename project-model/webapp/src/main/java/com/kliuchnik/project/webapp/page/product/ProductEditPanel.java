@@ -22,6 +22,7 @@ import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 
+import com.googlecode.wicket.kendo.ui.widget.notification.Notification;
 import com.kliuchnik.project.dataaccess.filters.SkladFilter;
 import com.kliuchnik.project.datamodel.Product;
 import com.kliuchnik.project.datamodel.Sklad;
@@ -65,10 +66,13 @@ public class ProductEditPanel extends Panel {
 //		} else {
 //			add(new ProductEditPanel("panel", ProductsPage.this));
 //	}
-		 
+		final Notification notification = new Notification("notification");
+		this.add(notification);
 		Form <Product> form = new Form <>("form", new CompoundPropertyModel<>(product));
 		add(form);
-		
+		FeedbackPanel feedBackPanel = new FeedbackPanel("feedback");
+		feedBackPanel.setVisible(false);
+		form.add(feedBackPanel);
 		
 		
 		TextField<String> nameField = new TextField<>("productName");

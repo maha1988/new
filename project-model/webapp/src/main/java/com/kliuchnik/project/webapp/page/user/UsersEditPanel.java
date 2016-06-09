@@ -7,9 +7,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
@@ -18,6 +20,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.validator.PatternValidator;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 
@@ -41,6 +44,7 @@ public class UsersEditPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private UserService userService;
+	private Customer customer;
 	private User user;
 	private ModalWindow modalWindow;
     private UserFilter userFilter;
@@ -62,8 +66,11 @@ public class UsersEditPanel extends Panel {
 	protected void onInitialize() {
 		super.onInitialize();
 		userFilter= new UserFilter();
-		Form  form = new Form ("form", new CompoundPropertyModel<>(user));
-		add(form);
+		Form <User> form = new Form <User>("form", new CompoundPropertyModel<User>(user));
+			
+		FeedbackPanel feedBackPanel = new FeedbackPanel("feedback");
+		feedBackPanel.setVisible(false);
+		form.add(feedBackPanel);
 		
 		TextField<String> nameField = new TextField<String>("name",
 			new PropertyModel<>(user, "name"));
@@ -76,6 +83,7 @@ public class UsersEditPanel extends Panel {
 			new PropertyModel<>(user, "password"));
 		passwordField.setRequired(true);
 		passwordField.add(StringValidator.maximumLength(100));
+		passwordField.add(StringValidator.minimumLength(3));
 		form.add(passwordField);
 
 		
@@ -84,21 +92,103 @@ public class UsersEditPanel extends Panel {
 		form.add(role);
 		
 		
+		
+		
+		TextField<String> firstNField = new TextField<String>("firstN",
+				new PropertyModel<>(customer, "firstN"));
+		firstNField.add(new AjaxFormComponentUpdatingBehavior("change") {
+			@Override
+			protected void onUpdate(AjaxRequestTarget target) {
+
+			}
+		});
+		firstNField.setRequired(true);
+		firstNField.add(StringValidator.maximumLength(100));
+		firstNField.add(StringValidator.minimumLength(2));
+		firstNField.add(new PatternValidator("[А-Яа-я]+"));
+		form.add(firstNField);
+		
+		TextField<String> lastNField = new TextField<String>("lastN",
+				new PropertyModel<>(customer, "lastN"));
+		lastNField.add(new AjaxFormComponentUpdatingBehavior("change") {
+			@Override
+			protected void onUpdate(AjaxRequestTarget target) {
+
+			}
+		});
+		lastNField.setRequired(true);
+		lastNField.add(StringValidator.maximumLength(100));
+		lastNField.add(StringValidator.minimumLength(2));
+		lastNField.add(new PatternValidator("[А-Яа-я]+"));
+		form.add(lastNField);
+		
+		
+		TextField<String> addressField = new TextField<String>("address",
+				new PropertyModel<>(customer, "address"));
+		addressField.add(new AjaxFormComponentUpdatingBehavior("change") {
+			@Override
+			protected void onUpdate(AjaxRequestTarget target) {
+
+			}
+		});
+		addressField.setRequired(true);
+		addressField.add(StringValidator.maximumLength(100));
+		addressField.add(StringValidator.minimumLength(2));
+		addressField.add(new PatternValidator("[А-Яа-я]+"));
+		form.add(addressField);
+		
+		TextField<String> bankRField = new TextField<String>("bankR",
+				new PropertyModel<>(customer, "bankR"));
+		bankRField.add(new AjaxFormComponentUpdatingBehavior("change") {
+			@Override
+			protected void onUpdate(AjaxRequestTarget target) {
+
+			}
+		});
+		bankRField.setRequired(true);
+		bankRField.add(StringValidator.maximumLength(100));
+		bankRField.add(StringValidator.minimumLength(2));
+		bankRField.add(new PatternValidator("[А-Яа-я]+"));
+		form.add(bankRField);
+//		TextField<String> firstNField = new TextField<>("firstN");
+//		firstNField.setRequired(true);
+//		firstNField.add(StringValidator.maximumLength(100));
+//		form.add(firstNField);
+		
+//		TextField<String> lastNField = new TextField<>("lastN");
+//		lastNField.setRequired(true);
+//		lastNField.add(StringValidator.maximumLength(100));
+//		form.add(lastNField);
+////		
+//		TextField<String> addressField = new TextField<>("address");
+//		addressField.setRequired(true);
+//		addressField.add(StringValidator.maximumLength(100));
+//		form.add(addressField);
+
+//		TextField<String> bankRField = new TextField<>("bankR");
+//		bankRField.setRequired(true);
+//		bankRField.add(StringValidator.maximumLength(100));
+//		form.add(bankRField);
+//		
+		
 	     form.add(new AjaxSubmitLink("save") {
 	            @Override
 	            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-	                super.onSubmit(target, form);
-	                userService.saveOrUpdate(user);
-	                
-	                UsersPage page = new UsersPage();
-	                String localizedMessage = getString("user.saved");
-	                page.info(localizedMessage);
+	            	if (user.getId() == null) {
 
-	                setResponsePage(page);
-	                
-	                modalWindow.close(target);
-	            }
-	        });
+						userService.register(user, customer);
+					} else {
+						userService.update(user);
+						userService.update(customer);
+					}
+					modalWindow.close(target);
+					setResponsePage(new UsersPage());
+				}
+			});
+	     
+	     
+	     add(form);
+	     
 	     form.add(new AjaxLink("cancel") {
 	            @Override
 	            public void onClick(AjaxRequestTarget target) {
@@ -106,6 +196,7 @@ public class UsersEditPanel extends Panel {
 	            }
 	        });
 
-		
+
+
 	}
 }

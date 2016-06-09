@@ -1,11 +1,20 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
+	<head>
+	
 	<meta charset="utf-8" />
+	</head>
 	<h2><wicket:message key="create.product" /></h2>
 	<form wicket:id="form">
 		
 		<table style="width: 100%">
+		
+		<tr>
+				<td><span wicket:id="feedback" /></td>
+			</tr>
+		
+		
 			<tr>
-				<td><b><wicket:message key="name.product" /></b></td>
+				<td><b><wicket:message key="n.product" /></b></td>
 				<td><input wicket:message="title:products.name.title" type="text" wicket:id="productName" /></td>
 			</tr>
 			<tr>
@@ -39,5 +48,5 @@
 
 
 	</form>
-	
+	<div wicket:id="notification"></div>
 </wicket:panel>

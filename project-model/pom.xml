@@ -18,7 +18,7 @@
 		<module>datamodel</module>
 		<module>dataaccess</module>
 		<module>services</module>
-		 <module>webapp</module> 
+		<module>webapp</module>
 	</modules>
 
 	<dependencyManagement>
@@ -59,13 +59,13 @@
 				<artifactId>postgresql</artifactId>
 				<version>9.3-1100-jdbc41</version>
 			</dependency>
-<dependency>
+			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-jpamodelgen</artifactId>
 				<version>4.3.4.Final</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>javax.inject</groupId>
 				<artifactId>javax.inject</artifactId>
@@ -124,8 +124,8 @@
 				<version>4.11</version>
 				<scope>test</scope>
 			</dependency>
-			
-			
+
+
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
@@ -146,9 +146,9 @@
 				<artifactId>log4j-jcl</artifactId>
 				<version>2.1</version>
 			</dependency>
-			
-			
-			
+
+
+
 			<!-- WICKET DEPENDENCIES -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
@@ -166,9 +166,6 @@
 				<version>${wicket.version}</version>
 			</dependency>
 
-
-
-
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
 				<artifactId>wicket-spring</artifactId>
@@ -180,7 +177,16 @@
 				<version>${wicket.version}</version>
 			</dependency>
 
-
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-devutils</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.uwyn</groupId>
+				<artifactId>jhighlight</artifactId>
+				<version>1.0</version>
+			</dependency>
 
 			<!-- JETTY DEPENDENCIES FOR TESTING -->
 			<dependency>
@@ -214,10 +220,25 @@
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
-			
-			
-			
+			<!-- wicket-jquery -->
+			<dependency>
+				<groupId>com.googlecode.wicket-jquery-ui</groupId>
+				<artifactId>wicket-jquery-ui</artifactId>
+				<version>7.3.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.wicket-jquery-ui</groupId>
+				<artifactId>wicket-kendo-ui</artifactId>
+				<version>7.3.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.wicket-jquery-ui</groupId>
+				<artifactId>wicket-jquery-ui-theme-uilightness</artifactId>
+				<version>7.3.0</version>
+			</dependency>
+
+
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -237,7 +258,7 @@
 						<showDeprecation>true</showDeprecation>
 					</configuration>
 				</plugin>
-				
+
 				<!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-eclipse-plugin</artifactId> 
 					<version>2.9</version> <configuration> <downloadSources>true</downloadSources> 
 					<wtpversion>${wtp.version}</wtpversion> </configuration> </plugin -->

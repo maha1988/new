@@ -43,6 +43,8 @@ public class OrdersPage extends AbstractPage {
 	 
 	 private void addModalWindow(OrderListPanel orderListPanel) {
 	        ModalWindow modalWindow = new ModalWindow("modal");
+	       
+	        modalWindow.setTitle("Создание заказа");
 	        add(modalWindow);
 
 	        add(new AjaxLink("create") {

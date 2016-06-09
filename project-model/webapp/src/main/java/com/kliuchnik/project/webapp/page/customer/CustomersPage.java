@@ -50,6 +50,8 @@ public class CustomersPage extends AbstractPage {
  
  private void addModalWindow(CustomerListPanel customerListPanel) {
         ModalWindow modalWindow = new ModalWindow("modal");
+       
+        modalWindow.setTitle("Карточка покупателя");
         add(modalWindow);
 
         add(new AjaxLink("create") {

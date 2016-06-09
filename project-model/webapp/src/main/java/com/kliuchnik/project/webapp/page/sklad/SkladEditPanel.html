@@ -1,19 +1,18 @@
 <wicket:panel>
 <meta charset="utf-8" />
-	<h2>Sklad edit</h2>
+	<h2><wicket:message key="create.skald" /></h2>
 	<form wicket:id="form">
 	
 		<table>
 			<tr>
-				<td><b>Наименование:</b></td>
-				<td><input type="text" wicket:id="name" /></td>
+				<td><b><wicket:message key="name.sklad" /></b></td>
+				<td><input wicket:message="title:sklad.name.title" type="text" wicket:id="name" /></td>
 			</tr>
-			
-			
+				
 			<tr>
 				<td colspan="2">
-					<button wicket:id="save">Сохранить</button>
-					<button wicket:id="cancel">Отменить</button>
+					<button wicket:id="save"><wicket:message key="btn.save.product" /></button>
+					<button wicket:id="cancel"><wicket:message key="btn.notsave.product" /></button>
 				</td>
 			</tr>
 			
