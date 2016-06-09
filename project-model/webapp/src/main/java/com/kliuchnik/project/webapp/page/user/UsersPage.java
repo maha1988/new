@@ -43,19 +43,19 @@ public class UsersPage extends AbstractPage {
 	    }
 	 
 	 private void addModalWindow(UsersListPanel userListPanel) {
-	        ModalWindow modalWindow = new ModalWindow("modal");
-	        modalWindow.setTitle("Карточка пользователя");
-	        add(modalWindow);
+	        ModalWindow modal1 = new ModalWindow("modal");
+	        modal1.setTitle("Карточка пользователя");
+	        add(modal1);
 
 	        add(new AjaxLink("create") {
 	            @Override
 	            public void onClick(AjaxRequestTarget target) {
-	                modalWindow.setContent(new UsersEditPanel(modalWindow, new User()));
-	                modalWindow.show(target);
+	            	modal1.setContent(new UsersEditPanel(modal1));
+	            	modal1.show(target);
 	            }
 	        });
 
-	        modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
+	        modal1.setWindowClosedCallback(new WindowClosedCallback() {
 
 	            @Override
 	            public void onClose(AjaxRequestTarget target) {

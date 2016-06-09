@@ -43,8 +43,11 @@ public class ProductEditPanel extends Panel {
 	private Product product;
 	
 	private Sklad sklad;
-	
 	private ModalWindow modalWindow;
+	
+	
+	
+	
 
 	public ProductEditPanel(String id, Product product,ModalWindow modalWindow) {
 		super(id);

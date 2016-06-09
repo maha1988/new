@@ -31,14 +31,14 @@ public class UsersListPanel extends Panel {
 	@Inject
 	private UserService userService;
 	private User user;
-	private ModalWindow modalWindow;
+	private ModalWindow modal1;
 
 	
 
-	public UsersListPanel(ModalWindow modalWindow, User user) {
-		super(modalWindow.getContentId());
+	public UsersListPanel(ModalWindow modal1, User user) {
+		super(modal1.getContentId());
 		this.user = user;
-		this.modalWindow = modalWindow;	
+		this.modal1 = modal1;	
 	}
 
 		

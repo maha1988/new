@@ -49,22 +49,36 @@ public class ProductsPage extends AbstractPage {
 	 
 	 
 	 private void addModalWindow(ProductListPanel productListPanel) {
-	        ModalWindow modalWindow = new ModalWindow("modal");
-	       
-	        modalWindow.setTitle("Карточка продукта");
-	        add(modalWindow);
+	      
+		 
+		 final ModalWindow modal1 = new ModalWindow("modal1");
+			modal1.setCssClassName("modal_window");
+			modal1.setInitialHeight(500);
+			modal1.setResizable(false);
+			modal1.setWindowClosedCallback(new WindowClosedCallback() {
+
+				@Override
+				public void onClose(AjaxRequestTarget target) {
+					target.add(ProductsPage.this);
+
+				}
+			});
+			this.setOutputMarkupId(true);
+			add(modal1);
+			modal1.setTitle("Карточка продукта");
+	        
 
 	        add(new AjaxLink("create") {
 	            @Override
 	            public void onClick(AjaxRequestTarget target) {
-	                modalWindow.setContent(new ProductEditPanel(modalWindow, new Product()));
-	                modalWindow.show(target);
+	            	modal1.setContent(new ProductEditPanel(modal1, new Product()));
+	            	modal1.show(target);
 	            }
 	        });
 	        
 	               
 
-	        modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
+	        modal1.setWindowClosedCallback(new WindowClosedCallback() {
 
 	            @Override
 	            public void onClose(AjaxRequestTarget target) {

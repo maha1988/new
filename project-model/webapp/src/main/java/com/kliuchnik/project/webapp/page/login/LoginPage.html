@@ -1,21 +1,23 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
 <meta charset="utf-8" />
-
-<link
-	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
-	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+<link rel="stylesheet" href="kendo.custom.css" type="text/css"
+	media="all" title="Stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
 <link rel="stylesheet" href="stylelogin.css" type="text/css"
 	media="screen" title="Stylesheet" />
-
+<link rel="stylesheet" href="kendo.custom.css" type="text/css"
+	media="all" title="Stylesheet" />
 
 
 </head>
-
-<body>
+ <body>
 
 	<div class="login">
-		<div wicket:id="language-select" class="language-comp"></div>
+		
 		<h1 align="center">
 			<wicket:message key="login.toWeb" />
 		</h1>
@@ -31,16 +33,22 @@
 			</p>
 
 			<p class="submit">
-
-				<input type="submit" class="btn waves-effect" wicket:id="submit-btn"
-					name="commit" value="Login">
+              <button   class="btnl waves-effect" wicket:id="submit-btn"> <wicket:message key="btn.login" /></button>
+				
 			</p>
-
-
+			<div wicket:id="notification"></div>
+      <div wicket:id="feedbackpanel"></div>	
 		</form>
-
-		<div wicket:id="feedbackpanel"></div>
-
+			
+<div wicket:id="language-select" style= "position: absolute;
+	top: 2px;
+	right: 10px;
+	border-radius: 5px;" class="language-c"></div>
+	
+<p class="forgot-password">
+		<a style="color: #00a2d3;" wicket:id="newUser">new login</a>
+	</p>
+	<div wicket:id="modal1"></div>
 
 	</div>
 

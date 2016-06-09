@@ -4,6 +4,7 @@
 
 
 
+    <entry key="btn.login">Войти </entry>
 	<entry key="btn.search.product">Найти продукт </entry>
 	<entry key="btn.create.product">Создать продукт </entry>
 	<entry key="btn.create.order">Создать заказ </entry>

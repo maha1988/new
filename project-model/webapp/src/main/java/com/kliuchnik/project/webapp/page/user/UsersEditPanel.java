@@ -38,6 +38,7 @@ import com.kliuchnik.project.service.UserService;
 import com.kliuchnik.project.webapp.page.AbstractPage;
 import com.kliuchnik.project.webapp.page.common.SkladChoiceRenderer;
 import com.kliuchnik.project.webapp.page.common.UserRoleChoiceRenderer;
+import com.kliuchnik.project.webapp.page.login.LoginPage;
 import com.kliuchnik.project.webapp.page.product.ProductsPage;
 
 public class UsersEditPanel extends Panel {
@@ -46,56 +47,45 @@ public class UsersEditPanel extends Panel {
 	private UserService userService;
 	private Customer customer;
 	private User user;
-	private ModalWindow modalWindow;
-    private UserFilter userFilter;
-	
-    public UsersEditPanel( User user, String id) {
-        super(id);
-        this.user = user;
-        
-        
-    }
-	
-	public UsersEditPanel(ModalWindow modalWindow, User user) {
-			super(modalWindow.getContentId());
-			this.user = user;
-			this.modalWindow = modalWindow;
-		}
+	private ModalWindow modal1;
+	private UserFilter userFilter;
+
+	public UsersEditPanel(ModalWindow modal1) {
+		super(modal1.getContentId());
+		user = new User();
+		customer = new Customer();
+
+		this.modal1 = modal1;
+	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		userFilter= new UserFilter();
-		Form <User> form = new Form <User>("form", new CompoundPropertyModel<User>(user));
-			
+		userFilter = new UserFilter();
+		Form<User> form = new Form<User>("form", new CompoundPropertyModel<User>(user));
+		add(form);
 		FeedbackPanel feedBackPanel = new FeedbackPanel("feedback");
 		feedBackPanel.setVisible(false);
 		form.add(feedBackPanel);
-		
-		TextField<String> nameField = new TextField<String>("name",
-			new PropertyModel<>(user, "name"));
+
+		TextField<String> nameField = new TextField<String>("name", new PropertyModel<>(user, "name"));
 		nameField.setRequired(true);
 		nameField.add(StringValidator.maximumLength(100));
 		nameField.add(StringValidator.minimumLength(2));
 		form.add(nameField);
-		
-		TextField<String> passwordField = new TextField<>("password",
-			new PropertyModel<>(user, "password"));
+
+		TextField<String> passwordField = new TextField<>("password", new PropertyModel<>(user, "password"));
 		passwordField.setRequired(true);
 		passwordField.add(StringValidator.maximumLength(100));
 		passwordField.add(StringValidator.minimumLength(3));
 		form.add(passwordField);
 
-		
-		DropDownChoice<Role> role = new DropDownChoice<>("role",new PropertyModel<>(user, "role"),  Arrays.asList(Role.values()));
+		DropDownChoice<Role> role = new DropDownChoice<>("role", new PropertyModel<>(user, "role"),
+				Arrays.asList(Role.values()));
 		role.setRequired(true);
 		form.add(role);
-		
-		
-		
-		
-		TextField<String> firstNField = new TextField<String>("firstN",
-				new PropertyModel<>(customer, "firstN"));
+
+		TextField<String> firstNField = new TextField<String>("firstN", new PropertyModel<>(customer, "firstN"));
 		firstNField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -107,9 +97,8 @@ public class UsersEditPanel extends Panel {
 		firstNField.add(StringValidator.minimumLength(2));
 		firstNField.add(new PatternValidator("[А-Яа-я]+"));
 		form.add(firstNField);
-		
-		TextField<String> lastNField = new TextField<String>("lastN",
-				new PropertyModel<>(customer, "lastN"));
+
+		TextField<String> lastNField = new TextField<String>("lastN", new PropertyModel<>(customer, "lastN"));
 		lastNField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -121,10 +110,8 @@ public class UsersEditPanel extends Panel {
 		lastNField.add(StringValidator.minimumLength(2));
 		lastNField.add(new PatternValidator("[А-Яа-я]+"));
 		form.add(lastNField);
-		
-		
-		TextField<String> addressField = new TextField<String>("address",
-				new PropertyModel<>(customer, "address"));
+
+		TextField<String> addressField = new TextField<String>("address", new PropertyModel<>(customer, "address"));
 		addressField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -136,9 +123,8 @@ public class UsersEditPanel extends Panel {
 		addressField.add(StringValidator.minimumLength(2));
 		addressField.add(new PatternValidator("[А-Яа-я]+"));
 		form.add(addressField);
-		
-		TextField<String> bankRField = new TextField<String>("bankR",
-				new PropertyModel<>(customer, "bankR"));
+
+		TextField<String> bankRField = new TextField<String>("bankR", new PropertyModel<>(customer, "bankR"));
 		bankRField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
@@ -150,53 +136,29 @@ public class UsersEditPanel extends Panel {
 		bankRField.add(StringValidator.minimumLength(2));
 		bankRField.add(new PatternValidator("[А-Яа-я]+"));
 		form.add(bankRField);
-//		TextField<String> firstNField = new TextField<>("firstN");
-//		firstNField.setRequired(true);
-//		firstNField.add(StringValidator.maximumLength(100));
-//		form.add(firstNField);
-		
-//		TextField<String> lastNField = new TextField<>("lastN");
-//		lastNField.setRequired(true);
-//		lastNField.add(StringValidator.maximumLength(100));
-//		form.add(lastNField);
-////		
-//		TextField<String> addressField = new TextField<>("address");
-//		addressField.setRequired(true);
-//		addressField.add(StringValidator.maximumLength(100));
-//		form.add(addressField);
 
-//		TextField<String> bankRField = new TextField<>("bankR");
-//		bankRField.setRequired(true);
-//		bankRField.add(StringValidator.maximumLength(100));
-//		form.add(bankRField);
-//		
-		
-	     form.add(new AjaxSubmitLink("save") {
-	            @Override
-	            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-	            	if (user.getId() == null) {
+		form.add(new AjaxSubmitLink("save") {
+			@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				if (user.getId() == null) {
 
-						userService.register(user, customer);
-					} else {
-						userService.update(user);
-						userService.update(customer);
-					}
-					modalWindow.close(target);
-					setResponsePage(new UsersPage());
+					userService.saveOrUpdate(user);
+					userService.saveOrUpdate(customer);
+				} else {
+					userService.update(user);
+					userService.update(customer);
 				}
-			});
-	     
-	     
-	     add(form);
-	     
-	     form.add(new AjaxLink("cancel") {
-	            @Override
-	            public void onClick(AjaxRequestTarget target) {
-	                modalWindow.close(target);
-	            }
-	        });
+				modal1.close(target);
+				setResponsePage(new UsersPage());
+			}
+		});
 
-
+		form.add(new AjaxLink("cancel") {
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				modal1.close(target);
+			}
+		});
 
 	}
 }

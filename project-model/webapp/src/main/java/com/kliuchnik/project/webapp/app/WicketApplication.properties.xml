@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="btn.create.user">Create user </entry>
+
+
+	<entry key="btn.login">Login </entry>
+	<entry key="btn.create.user">Create user </entry>
 	<entry key="btn.create.product">Create product </entry>
 	<entry key="btn.create.order">Create order   </entry>
 	<entry key="btn.create.sklad">Create stock </entry>
 	<entry key="btn.create.customer">Create customer </entry>
 	<entry key="btn.create.delete">Delete </entry>
 	<entry key="btn.create.edit">Edit </entry>
-	 <entry key="btn.save.product">Save</entry>
-	 <entry key="btn.notsave.product">Сancel</entry>
+	<entry key="btn.save.product">Save</entry>
+	<entry key="btn.notsave.product">Сancel</entry>
 	<entry key="logo">Keeping products in stock </entry>
 
 	<entry key="menu.home">Home</entry>
@@ -25,7 +28,7 @@
 	<entry key="product.saved">Product saved</entry>
 
 	<entry key="name.sklad">Name stock </entry>
-	
+
 	<entry key="price.product">Price </entry>
 	<entry key="quantity.product">Quantity </entry>
 	<entry key="unit.product">Unit </entry>
@@ -47,20 +50,20 @@
 	<entry key="customer.address">Address</entry>
 	<entry key="customer.bankr">Bank</entry>
 
- <entry key="create.product">Product creation</entry>
- <entry key="create.skald">Stock creation</entry>
- <entry key="create.order">Order</entry>
- <entry key="create.user">User creation</entry>
- <entry key="create.customer">Customer creation</entry>
-	
- 
-  <entry key="n.product">Name product</entry>
-   <entry key="quantity.product">Quantity </entry>
-   <entry key="unit.product" >Unit </entry>
-    <entry key="price.product" >Price</entry>
- <entry key="data">Date</entry>
- <entry key="sum">Sum</entry>
- 
+	<entry key="create.product">Product creation</entry>
+	<entry key="create.skald">Stock creation</entry>
+	<entry key="create.order">Order</entry>
+	<entry key="create.user">User creation</entry>
+	<entry key="create.customer">Customer creation</entry>
+
+
+	<entry key="n.product">Name product</entry>
+	<entry key="quantity.product">Quantity </entry>
+	<entry key="unit.product">Unit </entry>
+	<entry key="price.product">Price</entry>
+	<entry key="data">Date</entry>
+	<entry key="sum">Sum</entry>
+
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>
 
@@ -68,5 +71,5 @@
 	<entry key="products.quantity.title">Enter quantity</entry>
 	<entry key="products.name.title">Enter name</entry>
 	<entry key="sklad.name.title">Enter stock name</entry>
-	
+
 </properties>
